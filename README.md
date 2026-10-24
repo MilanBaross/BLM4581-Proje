@@ -6,8 +6,14 @@ ASP.NET Core Razor Pages (.NET 10) + Entity Framework Core (Code-First) + Postgr
 ## Kurulum
 
 1. .NET 10 SDK ve PostgreSQL kurulu olmalı.
-2. `KampusPortali/appsettings.json` içindeki `DefaultConnection` bağlantı cümlesini kendi PostgreSQL kullanıcı adı ve şifrenize göre düzenleyin.
-3. EF Core aracını kurun (bir kere): `dotnet tool install --global dotnet-ef`
+2. EF Core aracını kurun (bir kere): `dotnet tool install --global dotnet-ef`
+3. PostgreSQL bağlantı bilgilerinizi **User Secrets** ile kaydedin (bir kere). Şifre depoya değil, bilgisayarınızdaki kullanıcı klasörüne kaydedilir; `appsettings.json` dosyasını düzenlemeyin.
+
+```bash
+cd KampusPortali
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=KampusPortaliDb;Username=postgres;Password=SIFRENIZ"
+```
+
 4. Veritabanını oluşturun ve çalıştırın:
 
 ```bash
