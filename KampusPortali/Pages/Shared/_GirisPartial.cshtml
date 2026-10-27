@@ -1,0 +1,30 @@
+@inject SignInManager<Kullanici> SignInManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        if (User.IsInRole(Roller.Yonetici))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-page="/Yonetim/Index">Yönetim Paneli</a>
+            </li>
+        }
+        <li class="nav-item">
+            <span class="nav-link text-muted">@User.Identity?.Name</span>
+        </li>
+        <li class="nav-item">
+            <form method="post" asp-page="/Cikis" class="d-inline">
+                <button type="submit" class="nav-link btn btn-link text-dark">Çıkış Yap</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-page="/Kayit">Kayıt Ol</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-page="/Giris">Giriş Yap</a>
+        </li>
+    }
+</ul>

@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KampusPortali</title>
+    <title>@ViewData["Title"] - AÜ Hub</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -26,16 +26,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Giris">Giriş Yap</a>
-                        </li>
                     </ul>
+                    <partial name="_GirisPartial" />
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @if (TempData["Bilgi"] is string bilgi)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @bilgi
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+                </div>
+            }
             @RenderBody()
         </main>
     </div>

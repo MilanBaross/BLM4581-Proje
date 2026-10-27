@@ -1,15 +1,16 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using KampusPortali.Models;
 
 namespace KampusPortali.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<Kullanici, IdentityRole<int>, int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
-        public DbSet<Kullanici> Kullanicilar { get; set; }
         public DbSet<Akademisyen> Akademisyenler { get; set; }
         public DbSet<Derslik> Derslikler { get; set; }
         public DbSet<Ders> Dersler { get; set; }
@@ -21,9 +22,9 @@ namespace KampusPortali.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Kullanici>()
-                .HasIndex(k => k.Email)
-                .IsUnique();
+            modelBuilder.Entity<Kullanici>().ToTable("Kullanicilar");
+            modelBuilder.Entity<IdentityRole<int>>().ToTable("Roller");
+            modelBuilder.Entity<IdentityUserRole<int>>().ToTable("KullaniciRolleri");
 
             modelBuilder.Entity<Kullanici>()
                 .HasIndex(k => k.OgrenciNo)

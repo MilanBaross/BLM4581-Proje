@@ -5,7 +5,7 @@
 }
 
 <div class="row justify-content-center mt-5">
-    <div class="col-md-4">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-4">
         <div class="card shadow-sm">
             <div class="card-body p-4">
                 <div class="text-center mb-4">
@@ -14,21 +14,25 @@
                     <p class="text-muted">Kampüs Portalına Hoş Geldiniz</p>
                 </div>
 
-                <form method="post">
+                <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
+
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Öğrenci No veya E-posta</label>
-                        <input type="text" class="form-control" placeholder="Örn: 200100111" required>
+                        <label asp-for="Girdi.KullaniciAdiVeyaEmail" class="form-label fw-semibold"></label>
+                        <input asp-for="Girdi.KullaniciAdiVeyaEmail" class="form-control" placeholder="Örn: 200100111" autocomplete="username" />
+                        <span asp-validation-for="Girdi.KullaniciAdiVeyaEmail" class="text-danger small"></span>
                     </div>
-                    
+
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Şifre</label>
-                        <input type="password" class="form-control" placeholder="••••••••" required>
+                        <label asp-for="Girdi.Sifre" class="form-label fw-semibold"></label>
+                        <input asp-for="Girdi.Sifre" class="form-control" placeholder="••••••••" autocomplete="current-password" />
+                        <span asp-validation-for="Girdi.Sifre" class="text-danger small"></span>
                     </div>
 
                     <div class="d-flex justify-content-between mb-3">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="hatirla">
-                            <label class="form-check-label" for="hatirla">Beni Hatırla</label>
+                            <input asp-for="Girdi.BeniHatirla" class="form-check-input" />
+                            <label asp-for="Girdi.BeniHatirla" class="form-check-label"></label>
                         </div>
                         <a href="#" class="text-decoration-none">Şifremi Unuttum</a>
                     </div>
@@ -37,7 +41,15 @@
                         Giriş Yap
                     </button>
                 </form>
+
+                <p class="text-center mt-3 mb-0">
+                    Hesabınız yok mu? <a asp-page="/Kayit" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none">Kayıt Olun</a>
+                </p>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

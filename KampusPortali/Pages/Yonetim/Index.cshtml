@@ -1,0 +1,34 @@
+@page
+@model KampusPortali.Pages.Yonetim.IndexModel
+@{
+    ViewData["Title"] = "Yönetim Paneli";
+}
+
+<h1 class="h3 mb-3">Yönetim Paneli</h1>
+<p class="text-muted">Kayıtlı kullanıcılar ve rolleri</p>
+
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Ad Soyad</th>
+                <th>E-posta</th>
+                <th>Öğrenci No</th>
+                <th>Rol</th>
+                <th>Kayıt Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var k in Model.Kullanicilar)
+            {
+                <tr>
+                    <td>@k.AdSoyad</td>
+                    <td>@k.Email</td>
+                    <td>@(k.OgrenciNo ?? "-")</td>
+                    <td><span class="badge @(k.Roller.Contains(Roller.Yonetici) ? "bg-danger" : "bg-secondary")">@k.Roller</span></td>
+                    <td>@k.KayitTarihi.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

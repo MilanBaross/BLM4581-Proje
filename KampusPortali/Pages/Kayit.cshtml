@@ -1,0 +1,74 @@
+@page
+@model KampusPortali.Pages.KayitModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <img src="~/images/au_logo.png" alt="AÜ Hub Logo" style="width: 90px; height: auto;" class="mb-2">
+                    <h2 class="fw-bold text-primary">Kayıt Ol</h2>
+                    <p class="text-muted">AÜ Hub hesabınızı oluşturun</p>
+                </div>
+
+                <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Girdi.Ad" class="form-label fw-semibold"></label>
+                            <input asp-for="Girdi.Ad" class="form-control" autocomplete="given-name" />
+                            <span asp-validation-for="Girdi.Ad" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Girdi.Soyad" class="form-label fw-semibold"></label>
+                            <input asp-for="Girdi.Soyad" class="form-control" autocomplete="family-name" />
+                            <span asp-validation-for="Girdi.Soyad" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Girdi.OgrenciNo" class="form-label fw-semibold"></label>
+                        <input asp-for="Girdi.OgrenciNo" class="form-control" placeholder="Örn: 200100111" inputmode="numeric" />
+                        <span asp-validation-for="Girdi.OgrenciNo" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Girdi.Email" class="form-label fw-semibold"></label>
+                        <input asp-for="Girdi.Email" class="form-control" placeholder="ornek@ogrenci.ankara.edu.tr" autocomplete="email" />
+                        <span asp-validation-for="Girdi.Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Girdi.Sifre" class="form-label fw-semibold"></label>
+                            <input asp-for="Girdi.Sifre" class="form-control" autocomplete="new-password" />
+                            <span asp-validation-for="Girdi.Sifre" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label asp-for="Girdi.SifreTekrar" class="form-label fw-semibold"></label>
+                            <input asp-for="Girdi.SifreTekrar" class="form-control" autocomplete="new-password" />
+                            <span asp-validation-for="Girdi.SifreTekrar" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <p class="form-text mt-0">Şifre en az 8 karakter olmalı, en az bir küçük harf ve bir rakam içermelidir.</p>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2">
+                        Kayıt Ol
+                    </button>
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    Zaten hesabınız var mı? <a asp-page="/Giris" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none">Giriş Yapın</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
