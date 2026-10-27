@@ -20,7 +20,7 @@ namespace KampusPortali.Pages
         {
             await _signInManager.SignOutAsync();
             TempData["Bilgi"] = "Başarıyla çıkış yaptınız.";
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Giris");
         }
     }
 }
