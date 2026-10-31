@@ -44,6 +44,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Yonetim", "SadeceYonetici");
+    options.Conventions.AuthorizeFolder("/Kampus");
 });
 
 var app = builder.Build();

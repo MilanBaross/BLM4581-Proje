@@ -11,14 +11,15 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-xl navbar-toggleable-xl navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand fw-bold text-primary" asp-area="" asp-page="/Index">AÜ Hub</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#anaMenu" aria-controls="anaMenu"
+                        aria-expanded="false" aria-label="Menüyü aç/kapat">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                <div class="navbar-collapse collapse" id="anaMenu">
+                    <partial name="_ModulMenuPartial" />
                     <partial name="_GirisPartial" />
                 </div>
             </div>
