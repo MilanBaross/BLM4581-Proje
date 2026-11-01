@@ -24,5 +24,6 @@ namespace KampusPortali.Models
 
         public ICollection<KutuphaneMasasi> RezerveMasalar { get; set; } = new List<KutuphaneMasasi>();
         public ICollection<KayipEsya> BildirilenEsyalar { get; set; } = new List<KayipEsya>();
+        public ICollection<Duyuru> Duyurular { get; set; } = new List<Duyuru>();
     }
 }

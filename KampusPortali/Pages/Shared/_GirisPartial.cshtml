@@ -1,30 +1,29 @@
-@inject SignInManager<Kullanici> SignInManager
+@inject UserManager<Kullanici> UserManager
+@{
+    var aktifSayfa = ViewContext.RouteData.Values["page"] as string;
+    var kullanici = await UserManager.GetUserAsync(User);
+    var adSoyad = kullanici != null ? $"{kullanici.Ad} {kullanici.Soyad}" : User.Identity?.Name;
+    var basHarf = string.IsNullOrEmpty(adSoyad) ? "?" : adSoyad.Substring(0, 1).ToUpper();
+}
 
-<ul class="navbar-nav ms-auto">
-    @if (SignInManager.IsSignedIn(User))
+<div class="yan-menu-alt">
+    @if (User.IsInRole(Roller.Yonetici))
     {
-        if (User.IsInRole(Roller.Yonetici))
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-page="/Yonetim/Index">Yönetim Paneli</a>
-            </li>
-        }
-        <li class="nav-item d-xl-none d-xxl-block">
-            <span class="nav-link text-muted">@User.Identity?.Name</span>
-        </li>
-        <li class="nav-item">
-            <form method="post" asp-page="/Cikis" class="d-inline">
-                <button type="submit" class="nav-link btn btn-link text-dark">Çıkış Yap</button>
-            </form>
-        </li>
+        <a asp-page="/Yonetim/Index" class="yan-menu-link mb-2 @(aktifSayfa == "/Yonetim/Index" ? "aktif" : "")">
+            <i class="bi bi-shield-lock"></i> Yönetim Paneli
+        </a>
     }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-page="/Kayit">Kayıt Ol</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-page="/Giris">Giriş Yap</a>
-        </li>
-    }
-</ul>
+
+    <div class="kullanici-kutusu">
+        <div class="kullanici-avatar">@basHarf</div>
+        <div class="kullanici-bilgi">
+            <div class="kullanici-ad">@adSoyad</div>
+            <div class="kullanici-eposta">@User.Identity?.Name</div>
+        </div>
+        <form method="post" asp-page="/Cikis">
+            <button type="submit" class="btn btn-cikis" title="Çıkış Yap" aria-label="Çıkış Yap">
+                <i class="bi bi-box-arrow-right"></i>
+            </button>
+        </form>
+    </div>
+</div>

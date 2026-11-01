@@ -1,17 +1,11 @@
-@inject SignInManager<Kullanici> SignInManager
-
-@if (SignInManager.IsSignedIn(User))
-{
+@{
     var aktifSayfa = ViewContext.RouteData.Values["page"] as string;
+}
 
-    <ul class="navbar-nav me-auto">
-        @foreach (var modul in Moduller.Tumu)
-        {
-            var aktif = aktifSayfa == modul.Sayfa;
-            <li class="nav-item">
-                <a class="nav-link @(aktif ? "active fw-semibold" : "text-dark")" asp-page="@modul.Sayfa"
-                   aria-current="@(aktif ? "page" : null)">@modul.Baslik</a>
-            </li>
-        }
-    </ul>
+@foreach (var modul in Moduller.Tumu)
+{
+    var aktif = aktifSayfa == modul.Sayfa;
+    <a asp-page="@modul.Sayfa" class="yan-menu-link @(aktif ? "aktif" : "")" aria-current="@(aktif ? "page" : null)">
+        <i class="bi @modul.Ikon"></i> @modul.Baslik
+    </a>
 }

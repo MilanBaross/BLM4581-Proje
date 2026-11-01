@@ -17,6 +17,7 @@ namespace KampusPortali.Data
         public DbSet<KutuphaneMasasi> KutuphaneMasalari { get; set; }
         public DbSet<Etkinlik> Etkinlikler { get; set; }
         public DbSet<KayipEsya> KayipEsyalar { get; set; }
+        public DbSet<Duyuru> Duyurular { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,6 +64,12 @@ namespace KampusPortali.Data
                 .WithMany(k => k.BildirilenEsyalar)
                 .HasForeignKey(e => e.BildirenKullaniciId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Duyuru>()
+                .HasOne(d => d.Yazar)
+                .WithMany(k => k.Duyurular)
+                .HasForeignKey(d => d.YazarId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

@@ -1,30 +1,79 @@
-﻿@page
+@page
 @model IndexModel
+@using System.Globalization
 @{
     ViewData["Title"] = "Ana Sayfa";
+    var tr = new CultureInfo("tr-TR");
+    var bugun = DateTime.Now.ToString("d MMMM yyyy, dddd", tr);
 }
 
-<div class="d-flex align-items-center gap-3 mt-4 mb-4">
-    <img src="~/images/au_logo.png" alt="AÜ Hub Logo" style="width: 56px; height: auto;">
+<div class="karsilama">
     <div>
-        <h1 class="h4 fw-bold text-primary mb-0">Kampüs Modülleri</h1>
-        <p class="text-muted mb-0">Kullanmak istediğiniz modülü seçin.</p>
+        <p class="karsilama-tarih">@bugun</p>
+        <h1>Hoş geldin, @Model.Ad</h1>
+        <p class="mb-0">Ankara Üniversitesi Kampüs Portalı'na hoş geldin. Kampüs hizmetlerine buradan ulaşabilirsin.</p>
     </div>
+    <img src="~/images/au_logo.png" alt="" class="karsilama-logo d-none d-md-block">
 </div>
 
-<div class="row g-4">
-    @foreach (var modul in Moduller.Tumu)
-    {
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm modul-karti">
-                <div class="card-body">
-                    <div class="fs-2 mb-2" aria-hidden="true">@modul.Ikon</div>
-                    <h2 class="h5 card-title">
-                        <a asp-page="@modul.Sayfa" class="stretched-link text-decoration-none">@modul.Baslik</a>
-                    </h2>
-                    <p class="card-text text-muted">@modul.Aciklama</p>
-                </div>
+<section class="bolum">
+    <h2 class="bolum-baslik">Kampüs Modülleri</h2>
+
+    <div class="row g-4">
+        @foreach (var modul in Moduller.Tumu)
+        {
+            <div class="col-12 col-md-6 col-xl-4">
+                <a asp-page="@modul.Sayfa" class="modul-karti">
+                    <span class="modul-ikon"><i class="bi @modul.Ikon"></i></span>
+                    <span class="modul-metin">
+                        <span class="modul-baslik">@modul.Baslik</span>
+                        <span class="modul-aciklama">@modul.Aciklama</span>
+                    </span>
+                    <i class="bi bi-chevron-right modul-ok"></i>
+                </a>
             </div>
+        }
+    </div>
+</section>
+
+<section class="bolum">
+    <h2 class="bolum-baslik">Duyurular</h2>
+
+    @if (Model.Duyurular.Count == 0)
+    {
+        <div class="panel-kart bos-durum">
+            <i class="bi bi-megaphone"></i>
+            <h3>Henüz duyuru yok</h3>
+            <p class="mb-0">Yöneticiler tarafından paylaşılan duyurular burada görünecek.</p>
         </div>
     }
-</div>
+    else
+    {
+        <div class="panel-kart p-0">
+            @foreach (var duyuru in Model.Duyurular)
+            {
+                var tarih = duyuru.YayinTarihi.ToLocalTime();
+                <article class="duyuru">
+                    <div class="duyuru-tarih">
+                        <span class="duyuru-gun">@tarih.Day</span>
+                        <span class="duyuru-ay">@tarih.ToString("MMM", tr)</span>
+                    </div>
+                    <div class="duyuru-icerik">
+                        <h3 class="duyuru-baslik">
+                            @if (duyuru.OnemliMi)
+                            {
+                                <span class="badge rozet-onemli">Önemli</span>
+                            }
+                            @duyuru.Baslik
+                        </h3>
+                        <p class="duyuru-metin">@duyuru.Icerik</p>
+                        <div class="duyuru-bilgi">
+                            @(duyuru.Yazar != null ? $"{duyuru.Yazar.Ad} {duyuru.Yazar.Soyad}" : "Yönetim")
+                            &middot; @tarih.ToString("d MMMM yyyy, HH:mm", tr)
+                        </div>
+                    </div>
+                </article>
+            }
+        </div>
+    }
+</section>
