@@ -1,48 +1,49 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<Kullanici> SignInManager
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AÜ Hub</title>
     <script type="importmap"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KampusPortali.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-xl navbar-toggleable-xl navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand fw-bold text-primary" asp-area="" asp-page="/Index">AÜ Hub</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#anaMenu" aria-controls="anaMenu"
-                        aria-expanded="false" aria-label="Menüyü aç/kapat">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse" id="anaMenu">
-                    <partial name="_ModulMenuPartial" />
-                    <partial name="_GirisPartial" />
-                </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="uygulama">
+            <partial name="_YanMenu" />
+
+            <div class="icerik-alani">
+                <header class="mobil-ust-bar d-lg-none">
+                    <button class="btn btn-ikon" type="button" data-bs-toggle="offcanvas" data-bs-target="#yanMenu"
+                            aria-controls="yanMenu" aria-label="Menüyü aç">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <a asp-page="/Index" class="marka-yazi text-white">AÜ Hub</a>
+                </header>
+
+                <main role="main" class="icerik">
+                    <partial name="_BilgiMesaji" />
+                    @RenderBody()
+                </main>
+
+                <footer class="alt-bilgi">
+                    &copy; 2026 AÜ Hub &middot; Ankara Üniversitesi Kampüs Portalı
+                </footer>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @if (TempData["Bilgi"] is string bilgi)
-            {
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    @bilgi
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
-                </div>
-            }
+        </div>
+    }
+    else
+    {
+        <main role="main" class="container py-5">
+            <partial name="_BilgiMesaji" />
             @RenderBody()
         </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - AÜ Hub - Ankara Üniversitesi Kampüs Portalı
-        </div>
-    </footer>
+    }
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

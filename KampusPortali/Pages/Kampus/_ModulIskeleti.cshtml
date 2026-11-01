@@ -1,19 +1,23 @@
 @model Modul
 
-<div class="row justify-content-center mt-4">
-    <div class="col-12 col-lg-8">
-        <h1 class="h3 fw-bold text-primary">
-            <span aria-hidden="true">@Model.Ikon</span> @Model.Baslik
-        </h1>
-        <p class="text-muted">@Model.Aciklama</p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Baslik</li>
+    </ol>
+</nav>
 
-        <div class="card border-0 bg-light text-center py-5 mt-4">
-            <div class="card-body">
-                <span class="badge bg-warning text-dark mb-3">Yakında</span>
-                <p class="mb-0 text-muted">Bu modül üzerinde çalışılıyor. Çok yakında burada olacak.</p>
-            </div>
-        </div>
-
-        <a asp-page="/Index" class="btn btn-outline-primary mt-4">Ana Sayfaya Dön</a>
+<div class="modul-ust">
+    <span class="modul-ust-ikon"><i class="bi @Model.Ikon"></i></span>
+    <div>
+        <h1>@Model.Baslik</h1>
+        <p class="mb-0">@Model.Aciklama</p>
     </div>
+</div>
+
+<div class="panel-kart bos-durum">
+    <i class="bi @Model.Ikon"></i>
+    <h2>Bu modül hazırlanıyor</h2>
+    <p>İçerik sonraki haftalarda eklenecek.</p>
+    <a asp-page="/Index" class="btn btn-outline-secondary btn-sm">Ana Sayfaya Dön</a>
 </div>

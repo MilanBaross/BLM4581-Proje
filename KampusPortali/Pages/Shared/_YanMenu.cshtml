@@ -1,0 +1,30 @@
+@{
+    var aktifSayfa = ViewContext.RouteData.Values["page"] as string;
+}
+
+<aside class="offcanvas-lg offcanvas-start yan-menu" tabindex="-1" id="yanMenu" aria-label="Ana menü">
+    <div class="yan-menu-ic">
+        <div class="yan-menu-ust">
+            <a asp-page="/Index" class="d-flex align-items-center gap-2 text-decoration-none">
+                <img src="~/images/au_logo.png" alt="Ankara Üniversitesi logosu" class="yan-menu-logo">
+                <span class="yan-menu-marka">
+                    <span class="yan-menu-marka-ad">AÜ Hub</span>
+                    <span class="yan-menu-marka-alt">Kampüs Portalı</span>
+                </span>
+            </a>
+            <button type="button" class="btn-close btn-close-white d-lg-none" data-bs-dismiss="offcanvas"
+                    data-bs-target="#yanMenu" aria-label="Menüyü kapat"></button>
+        </div>
+
+        <nav class="yan-menu-gezinti">
+            <a asp-page="/Index" class="yan-menu-link @(aktifSayfa == "/Index" ? "aktif" : "")">
+                <i class="bi bi-grid-1x2"></i> Ana Sayfa
+            </a>
+
+            <div class="yan-menu-bolum">Modüller</div>
+            <partial name="_ModulMenuPartial" />
+        </nav>
+
+        <partial name="_GirisPartial" />
+    </div>
+</aside>

@@ -4,11 +4,13 @@
     ViewData["Title"] = "Yönetim Paneli";
 }
 
-<h1 class="h3 mb-3">Yönetim Paneli</h1>
-<p class="text-muted">Kayıtlı kullanıcılar ve rolleri</p>
+<div class="sayfa-baslik">
+    <h1>Yönetim Paneli</h1>
+    <p>Kayıtlı kullanıcılar ve rolleri</p>
+</div>
 
-<div class="table-responsive">
-    <table class="table table-striped align-middle">
+<div class="panel-kart p-0 table-responsive">
+    <table class="table table-hover align-middle mb-0">
         <thead>
             <tr>
                 <th>Ad Soyad</th>
@@ -25,7 +27,7 @@
                     <td>@k.AdSoyad</td>
                     <td>@k.Email</td>
                     <td>@(k.OgrenciNo ?? "-")</td>
-                    <td><span class="badge @(k.Roller.Contains(Roller.Yonetici) ? "bg-danger" : "bg-secondary")">@k.Roller</span></td>
+                    <td><span class="badge @(k.Roller.Contains(Roller.Yonetici) ? "rozet-yonetici" : "rozet-kullanici")">@k.Roller</span></td>
                     <td>@k.KayitTarihi.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
                 </tr>
             }

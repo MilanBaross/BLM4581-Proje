@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AÜ Hub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="giris-sayfasi">
+    <main role="main" class="giris-sarmal">
+        <div class="giris-kutu">
+            <div class="giris-marka">
+                <img src="~/images/au_logo.png" alt="Ankara Üniversitesi logosu">
+                <div>
+                    <div class="giris-kurum">Ankara Üniversitesi</div>
+                    <div class="giris-portal">Kampüs Portalı</div>
+                </div>
+            </div>
+
+            <div class="giris-kart">
+                <partial name="_BilgiMesaji" />
+                @RenderBody()
+            </div>
+
+            <p class="giris-alt">&copy; 2026 AÜ Hub</p>
+        </div>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

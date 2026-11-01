@@ -129,6 +129,40 @@ namespace KampusPortali.Migrations
                     b.ToTable("Derslikler");
                 });
 
+            modelBuilder.Entity("KampusPortali.Models.Duyuru", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Baslik")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("Icerik")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<bool>("OnemliMi")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("YayinTarihi")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("YazarId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("YazarId");
+
+                    b.ToTable("Duyurular");
+                });
+
             modelBuilder.Entity("KampusPortali.Models.Etkinlik", b =>
                 {
                     b.Property<int>("Id")
@@ -483,6 +517,16 @@ namespace KampusPortali.Migrations
                     b.Navigation("Derslik");
                 });
 
+            modelBuilder.Entity("KampusPortali.Models.Duyuru", b =>
+                {
+                    b.HasOne("KampusPortali.Models.Kullanici", "Yazar")
+                        .WithMany("Duyurular")
+                        .HasForeignKey("YazarId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Yazar");
+                });
+
             modelBuilder.Entity("KampusPortali.Models.KayipEsya", b =>
                 {
                     b.HasOne("KampusPortali.Models.Kullanici", "BildirenKullanici")
@@ -568,6 +612,8 @@ namespace KampusPortali.Migrations
             modelBuilder.Entity("KampusPortali.Models.Kullanici", b =>
                 {
                     b.Navigation("BildirilenEsyalar");
+
+                    b.Navigation("Duyurular");
 
                     b.Navigation("RezerveMasalar");
                 });
