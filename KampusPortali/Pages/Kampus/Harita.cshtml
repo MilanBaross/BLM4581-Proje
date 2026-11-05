@@ -1,7 +1,85 @@
 @page
+@model KampusPortali.Pages.Kampus.HaritaModel
 @{
     var modul = Moduller.Harita;
     ViewData["Title"] = modul.Baslik;
 }
 
-<partial name="_ModulIskeleti" model="modul" />
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@modul.Baslik</li>
+    </ol>
+</nav>
+
+<div class="modul-ust">
+    <span class="modul-ust-ikon"><i class="bi @modul.Ikon"></i></span>
+    <div>
+        <h1>@modul.Baslik</h1>
+        <p class="mb-0">@modul.Aciklama</p>
+    </div>
+</div>
+
+@if (Model.Turler.Count > 1)
+{
+    <div class="harita-filtre" role="group" aria-label="Mekan türüne göre filtrele">
+        <button type="button" class="filtre-dugme aktif" data-tur="">Tümü</button>
+        @foreach (var tur in Model.Turler)
+        {
+            <button type="button" class="filtre-dugme" data-tur="@tur">
+                <i class="bi @tur.Ikon()"></i> @tur.GorunenAd()
+            </button>
+        }
+    </div>
+}
+
+<div class="row g-3">
+    <div class="col-12 col-lg-8">
+        <div class="panel-kart p-0 overflow-hidden">
+            <div id="kampusHaritasi" class="harita-kutu" aria-label="Kampüs haritası"></div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <div class="panel-kart p-0">
+            <div class="mekan-listesi-baslik">Mekanlar (@Model.Mekanlar.Count)</div>
+
+            @if (Model.Mekanlar.Count == 0)
+            {
+                <div class="bos-durum py-4">
+                    <i class="bi bi-geo-alt"></i>
+                    <h3>Henüz mekan eklenmedi</h3>
+                    <p class="mb-0">Kampüsteki binalar eklendiğinde burada listelenecek.</p>
+                </div>
+            }
+            else
+            {
+                <ul class="mekan-listesi">
+                    @foreach (var mekan in Model.Mekanlar)
+                    {
+                        <li data-tur="@mekan.Tur">
+                            <button type="button" class="mekan-ogesi" data-id="@mekan.Id">
+                                <span class="modul-ikon"><i class="bi @mekan.Tur.Ikon()"></i></span>
+                                <span>
+                                    <span class="mekan-ad">@mekan.Ad</span>
+                                    <span class="mekan-tur">@mekan.Tur.GorunenAd()</span>
+                                </span>
+                            </button>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+<script id="mekanVerisi" type="application/json">@Html.Raw(Model.MekanlarJson)</script>
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="~/js/harita.js" asp-append-version="true"></script>
+}

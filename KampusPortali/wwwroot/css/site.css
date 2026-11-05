@@ -697,3 +697,142 @@ a {
     padding: 1.5rem;
   }
 }
+
+.harita-filtre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filtre-dugme {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--kenar);
+  border-radius: 999px;
+  background: var(--yuzey);
+  color: var(--yazi);
+  font-size: 0.85rem;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.filtre-dugme:hover {
+  border-color: var(--vurgu);
+  color: var(--vurgu);
+}
+
+.filtre-dugme.aktif {
+  background: var(--vurgu);
+  border-color: var(--vurgu);
+  color: #fff;
+}
+
+.harita-kutu {
+  width: 100%;
+  height: 520px;
+}
+
+.harita-isaret-kapsayici {
+  background: transparent;
+  border: 0;
+}
+
+.harita-isaret {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  background: var(--vurgu);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transform: rotate(-45deg);
+}
+
+.harita-isaret i {
+  color: #fff;
+  font-size: 0.9rem;
+  transform: rotate(45deg);
+}
+
+.leaflet-container {
+  font-family: inherit;
+}
+
+.harita-popup-baslik {
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.harita-popup-tur {
+  font-size: 0.78rem;
+  color: var(--vurgu);
+  margin-bottom: 0.35rem;
+}
+
+.harita-popup-aciklama {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--yazi-soluk);
+}
+
+.mekan-listesi-baslik {
+  padding: 0.9rem 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--kenar);
+}
+
+.mekan-listesi {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+  max-height: 470px;
+  overflow-y: auto;
+}
+
+.mekan-ogesi {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  text-align: left;
+}
+
+.mekan-ogesi:hover {
+  background: var(--vurgu-acik);
+}
+
+.mekan-ogesi .modul-ikon {
+  width: 32px;
+  height: 32px;
+  font-size: 0.95rem;
+}
+
+.mekan-ad {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--yazi);
+}
+
+.mekan-tur {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--yazi-soluk);
+}
+
+@media (max-width: 991.98px) {
+  .harita-kutu {
+    height: 380px;
+  }
+
+  .mekan-listesi {
+    max-height: none;
+  }
+}
