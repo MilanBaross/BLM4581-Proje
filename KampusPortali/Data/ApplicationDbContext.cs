@@ -18,6 +18,7 @@ namespace KampusPortali.Data
         public DbSet<Etkinlik> Etkinlikler { get; set; }
         public DbSet<KayipEsya> KayipEsyalar { get; set; }
         public DbSet<Duyuru> Duyurular { get; set; }
+        public DbSet<Mekan> Mekanlar { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +39,15 @@ namespace KampusPortali.Data
             modelBuilder.Entity<KutuphaneMasasi>()
                 .HasIndex(m => m.MasaNo)
                 .IsUnique();
+
+            modelBuilder.Entity<Mekan>()
+                .HasIndex(m => m.Ad)
+                .IsUnique();
+
+            modelBuilder.Entity<Mekan>()
+                .Property(m => m.Tur)
+                .HasConversion<string>()
+                .HasMaxLength(30);
 
             // Derslik veya akademisyen silinirse bağlı dersler sessizce silinmesin.
             modelBuilder.Entity<Ders>()
