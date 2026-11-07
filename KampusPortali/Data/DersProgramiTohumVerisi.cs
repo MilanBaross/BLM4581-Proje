@@ -1,0 +1,92 @@
+using KampusPortali.Models;
+
+namespace KampusPortali.Data
+{
+    public static class DersProgramiTohumVerisi
+    {
+        public static readonly Derslik[] Derslikler =
+        {
+            new Derslik { Id = 1, Ad = "Derslik 1", MekanId = 2, Not = null, MusaitMi = true },
+            new Derslik { Id = 2, Ad = "Derslik 2", MekanId = 2, Not = null, MusaitMi = true },
+            new Derslik { Id = 3, Ad = "Derslik 3", MekanId = 2, Not = null, MusaitMi = true },
+            new Derslik { Id = 4, Ad = "Derslik 4", MekanId = 2, Not = null, MusaitMi = true },
+            new Derslik { Id = 5, Ad = "LAB 1", MekanId = 2, Not = null, MusaitMi = true },
+            new Derslik { Id = 6, Ad = "LAB 3", MekanId = 2, Not = null, MusaitMi = true },
+            new Derslik { Id = 7, Ad = "Android Dersliği", MekanId = 2, Not = null, MusaitMi = true },
+            new Derslik { Id = 8, Ad = "Yapay Zeka Dersliği H1", MekanId = 5, Not = "Yapay Zeka Bölümü dersliği", MusaitMi = true },
+            new Derslik { Id = 9, Ad = "Yapay Zeka Dersliği J2", MekanId = 5, Not = "Yapay Zeka Bölümü dersliği", MusaitMi = true },
+            new Derslik { Id = 10, Ad = "BME2 Dersliği", MekanId = 6, Not = "Biyomedikal Mühendisliği Bölümü dersliği", MusaitMi = true },
+            new Derslik { Id = 11, Ad = "Yazılım Mühendisliği Dersliği 7", MekanId = 3, Not = null, MusaitMi = true },
+            new Derslik { Id = 12, Ad = "D Blok Servis Lab", MekanId = null, Not = "Tandoğan Yerleşkesi", MusaitMi = true }
+        };
+
+        public static readonly Ders[] Dersler =
+        {
+            new Ders { Id = 1, Kod = "COM1007", DersAdi = "COMPUTER PROGRAMMING I", LabMi = false, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(11, 20), DerslikId = 1 },
+            new Ders { Id = 2, Kod = "ENG101", DersAdi = "DEVELOPMENT OF READING AND WRITING SKILLS IN ENGLISH I", LabMi = false, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(17, 20), DerslikId = 4 },
+            new Ders { Id = 3, Kod = "PHY0105", DersAdi = "PHYSICS I", LabMi = true, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(15, 30), BitisSaati = new TimeOnly(17, 20), DerslikId = 12 },
+            new Ders { Id = 4, Kod = "COM1007", DersAdi = "COMPUTER PROGRAMMING I", LabMi = false, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(11, 20), DerslikId = 10 },
+            new Ders { Id = 5, Kod = "COM1007", DersAdi = "COMPUTER PROGRAMMING I", LabMi = true, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(11, 20), DerslikId = null },
+            new Ders { Id = 6, Kod = "COM1015", DersAdi = "COM1015", LabMi = false, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(15, 30), BitisSaati = new TimeOnly(18, 20), DerslikId = 2 },
+            new Ders { Id = 7, Kod = "PHY0105", DersAdi = "PHYSICS I", LabMi = false, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 8 },
+            new Ders { Id = 8, Kod = "MTH0143", DersAdi = "CALCULUS I", LabMi = false, Grup = "İngilizce 1. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(17, 20), DerslikId = 8 },
+            new Ders { Id = 9, Kod = "ENG201", DersAdi = "ADVANCED READING AND COMMUNICATION TECHNIQUES IN ENGLISH I", LabMi = false, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(8, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 4 },
+            new Ders { Id = 10, Kod = "COM2077", DersAdi = "COM2077", LabMi = false, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 1 },
+            new Ders { Id = 11, Kod = "COM2039", DersAdi = "COM2039", LabMi = false, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 1 },
+            new Ders { Id = 12, Kod = "COM2067", DersAdi = "COM2067", LabMi = false, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 2 },
+            new Ders { Id = 13, Kod = "COM2067", DersAdi = "COM2067 Laboratuvarı", LabMi = true, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(16, 30), BitisSaati = new TimeOnly(18, 20), DerslikId = null },
+            new Ders { Id = 14, Kod = "COM2077", DersAdi = "COM2077 Laboratuvarı", LabMi = true, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(11, 20), DerslikId = null },
+            new Ders { Id = 15, Kod = "COM2501", DersAdi = "COM2501", LabMi = false, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 2 },
+            new Ders { Id = 16, Kod = "COM2043", DersAdi = "COM2043", LabMi = false, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(15, 30), BitisSaati = new TimeOnly(18, 20), DerslikId = 1 },
+            new Ders { Id = 17, Kod = "COM2043", DersAdi = "COM2043 Laboratuvarı", LabMi = true, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = null },
+            new Ders { Id = 18, Kod = "COM2553", DersAdi = "FILE ORGANIZATION", LabMi = false, Grup = "İngilizce 2. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 11 },
+            new Ders { Id = 19, Kod = "COM3533", DersAdi = "COM3533", LabMi = false, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 3 },
+            new Ders { Id = 20, Kod = "COM3023", DersAdi = "COM3023", LabMi = false, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 4 },
+            new Ders { Id = 21, Kod = "COM3033", DersAdi = "COM3033", LabMi = false, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(14, 0), BitisSaati = new TimeOnly(16, 20), DerslikId = 1 },
+            new Ders { Id = 22, Kod = "COM3073", DersAdi = "COM3073", LabMi = false, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(10, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 9 },
+            new Ders { Id = 23, Kod = "COM3033", DersAdi = "COM3033 Laboratuvarı", LabMi = true, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = null },
+            new Ders { Id = 24, Kod = "COM3551", DersAdi = "COM3551", LabMi = false, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 1 },
+            new Ders { Id = 25, Kod = "COM3067", DersAdi = "COM3067", LabMi = false, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 2 },
+            new Ders { Id = 26, Kod = "COM3067", DersAdi = "COM3067 Laboratuvarı", LabMi = true, Grup = "İngilizce 3. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(16, 30), BitisSaati = new TimeOnly(18, 20), DerslikId = null },
+            new Ders { Id = 27, Kod = "COM4567", DersAdi = "INFORMATION SYSTEMS", LabMi = false, Grup = "İngilizce 4. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 3 },
+            new Ders { Id = 28, Kod = "COM4541", DersAdi = "COM4541", LabMi = false, Grup = "İngilizce 4. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 4 },
+            new Ders { Id = 29, Kod = "COM4573", DersAdi = "ARTIFICIAL NEURAL NETWORKS", LabMi = false, Grup = "İngilizce 4. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(10, 0), BitisSaati = new TimeOnly(12, 20), DerslikId = 4 },
+            new Ders { Id = 30, Kod = "COM4569", DersAdi = "DATA MINING", LabMi = false, Grup = "İngilizce 4. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(15, 30), BitisSaati = new TimeOnly(18, 20), DerslikId = 4 },
+            new Ders { Id = 31, Kod = "MAT0143", DersAdi = "Matematik I", LabMi = false, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(10, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 2 },
+            new Ders { Id = 32, Kod = "MAT0143", DersAdi = "Matematik I", LabMi = false, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(15, 20), DerslikId = 2 },
+            new Ders { Id = 33, Kod = "BLM1007", DersAdi = "Bilgisayar Programlama I", LabMi = false, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(15, 30), BitisSaati = new TimeOnly(17, 20), DerslikId = 2 },
+            new Ders { Id = 34, Kod = "BLM1007", DersAdi = "Bilgisayar Programlama I", LabMi = false, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(11, 20), DerslikId = 2 },
+            new Ders { Id = 35, Kod = "FZM0105", DersAdi = "Fizik I", LabMi = true, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(15, 20), DerslikId = 12 },
+            new Ders { Id = 36, Kod = "FZM0105", DersAdi = "Fizik I", LabMi = false, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 9 },
+            new Ders { Id = 37, Kod = "BLM1015", DersAdi = "BLM1015", LabMi = false, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 1 },
+            new Ders { Id = 38, Kod = "BLM1007", DersAdi = "Bilgisayar Programlama I", LabMi = true, Grup = "Türkçe 1. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(15, 20), DerslikId = null },
+            new Ders { Id = 39, Kod = "BLM2077", DersAdi = "BLM2077 Laboratuvarı", LabMi = true, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(11, 20), DerslikId = null },
+            new Ders { Id = 40, Kod = "BLM2501", DersAdi = "BLM2501", LabMi = false, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 6 },
+            new Ders { Id = 41, Kod = "BLM2043", DersAdi = "BLM2043", LabMi = false, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 2 },
+            new Ders { Id = 42, Kod = "BLM2043", DersAdi = "BLM2043 Laboratuvarı", LabMi = true, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(15, 20), DerslikId = null },
+            new Ders { Id = 43, Kod = "BLM2067", DersAdi = "BLM2067 Laboratuvarı", LabMi = true, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(15, 30), BitisSaati = new TimeOnly(17, 20), DerslikId = null },
+            new Ders { Id = 44, Kod = "BLM2067", DersAdi = "BLM2067", LabMi = false, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 2 },
+            new Ders { Id = 45, Kod = "BLM2537", DersAdi = "BLM2537", LabMi = false, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 1 },
+            new Ders { Id = 46, Kod = "BLM2077", DersAdi = "BLM2077", LabMi = false, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 2 },
+            new Ders { Id = 47, Kod = "BLM2039", DersAdi = "BLM2039", LabMi = false, Grup = "Türkçe 2. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 4 },
+            new Ders { Id = 48, Kod = "BLM3023", DersAdi = "BLM3023 Laboratuvarı", LabMi = true, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(11, 20), DerslikId = null },
+            new Ders { Id = 49, Kod = "BLM3033", DersAdi = "BLM3033 Laboratuvarı", LabMi = true, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(15, 20), DerslikId = null },
+            new Ders { Id = 50, Kod = "BLM3067", DersAdi = "BLM3067 Laboratuvarı", LabMi = true, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(15, 30), BitisSaati = new TimeOnly(17, 20), DerslikId = null },
+            new Ders { Id = 51, Kod = "BLM3557", DersAdi = "BLM3557", LabMi = false, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 4 },
+            new Ders { Id = 52, Kod = "BLM3033", DersAdi = "BLM3033", LabMi = false, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 1 },
+            new Ders { Id = 53, Kod = "BLM3067", DersAdi = "BLM3067", LabMi = false, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 1 },
+            new Ders { Id = 54, Kod = "BLM3533", DersAdi = "BLM3533", LabMi = false, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 4 },
+            new Ders { Id = 55, Kod = "BLM3073", DersAdi = "BLM3073", LabMi = false, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Thursday, BaslangicSaati = new TimeOnly(14, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 9 },
+            new Ders { Id = 56, Kod = "BLM3551", DersAdi = "BLM3551", LabMi = false, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 4 },
+            new Ders { Id = 57, Kod = "BLM3023", DersAdi = "BLM3023", LabMi = false, Grup = "Türkçe 3. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 1 },
+            new Ders { Id = 58, Kod = "BLM4551", DersAdi = "BLM4551", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 7 },
+            new Ders { Id = 59, Kod = "BLM4573", DersAdi = "Yapay Sinir Ağları", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Monday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 3 },
+            new Ders { Id = 60, Kod = "BLM4583", DersAdi = "BLM4583", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 5 },
+            new Ders { Id = 61, Kod = "BLM4541", DersAdi = "BLM4541", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Tuesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 3 },
+            new Ders { Id = 62, Kod = "BLM4581", DersAdi = "Ağ Tabanlı Teknolojiler ve Uygulamaları", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 3 },
+            new Ders { Id = 63, Kod = "BLM4587", DersAdi = "BLM4587", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Wednesday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 3 },
+            new Ders { Id = 64, Kod = "BLM4559", DersAdi = "BLM4559", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(9, 30), BitisSaati = new TimeOnly(12, 20), DerslikId = 3 },
+            new Ders { Id = 65, Kod = "BLM4561", DersAdi = "BLM4561", LabMi = false, Grup = "Türkçe 4. Sınıf", Gun = DayOfWeek.Friday, BaslangicSaati = new TimeOnly(13, 30), BitisSaati = new TimeOnly(16, 20), DerslikId = 3 }
+        };
+    }
+}

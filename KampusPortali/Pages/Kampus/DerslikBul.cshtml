@@ -1,7 +1,390 @@
 @page
+@model KampusPortali.Pages.Kampus.DerslikBulModel
+@using System.Globalization
 @{
     var modul = Moduller.DerslikBul;
     ViewData["Title"] = modul.Baslik;
+    var tr = new CultureInfo("tr-TR");
+    string GunAdi(DayOfWeek gun) => tr.DateTimeFormat.GetDayName(gun);
+    string GunKisa(DayOfWeek gun) => tr.DateTimeFormat.GetAbbreviatedDayName(gun);
+    string Saat(TimeOnly saat) => saat.ToString("HH:mm");
+    string GunEtiketi(DayOfWeek gun)
+    {
+        if (gun == Model.Bugun) return "Bugün";
+        if (gun == (DayOfWeek)(((int)Model.Bugun + 1) % 7)) return "Yarın";
+        return GunAdi(gun);
+    }
+    bool DersAdiFarkli(Ders ders) => ders.DersAdi != ders.Kod && !ders.DersAdi.StartsWith(ders.Kod);
+    var acikGun = Model.Gunler.Contains(Model.Bugun) ? Model.Bugun : Model.Gunler.FirstOrDefault();
 }
 
-<partial name="_ModulIskeleti" model="modul" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@modul.Baslik</li>
+    </ol>
+</nav>
+
+<div class="modul-ust">
+    <span class="modul-ust-ikon"><i class="bi @modul.Ikon"></i></span>
+    <div>
+        <h1>@modul.Baslik</h1>
+        <p class="mb-0">Aldığın dersleri seç; haftalık programını, dersliklerin yerini ve sınavlarını tek ekranda gör.</p>
+    </div>
+</div>
+
+<nav class="derslik-sekmeler" aria-label="Görünüm">
+    <a asp-page="/Kampus/DerslikBul" class="derslik-sekme @(!Model.BosDersliklerSekmesi ? "aktif" : "")">
+        <i class="bi bi-calendar-week"></i> Programım
+    </a>
+    <a asp-page="/Kampus/DerslikBul" asp-route-gorunum="bos" class="derslik-sekme @(Model.BosDersliklerSekmesi ? "aktif" : "")">
+        <i class="bi bi-door-open"></i> Boş Derslikler
+    </a>
+</nav>
+
+@if (Model.BosDersliklerSekmesi)
+{
+    <section class="bolum">
+        <h2 class="bolum-baslik">Şu an boş derslikler · @GunAdi(Model.Bugun) @Saat(Model.SuAnkiSaat)</h2>
+
+        @if (Model.BosDerslikler.Count == 0)
+        {
+            <div class="panel-kart bos-durum">
+                <i class="bi bi-door-closed"></i>
+                <h3>Şu an boş derslik yok</h3>
+                <p class="mb-0">Tüm derslikler derste. Biraz sonra tekrar bakın.</p>
+            </div>
+        }
+        else
+        {
+            <div class="bos-derslik-izgara">
+                @foreach (var bos in Model.BosDerslikler)
+                {
+                    <div class="panel-kart bos-derslik">
+                        <div class="bos-derslik-ad"><i class="bi bi-door-open"></i> @bos.Derslik.Ad</div>
+                        <div class="bos-derslik-bina">@bos.Derslik.Mekan?.Ad</div>
+                        <div class="bos-derslik-durum @(bos.BosKadar.HasValue ? "" : "gun-boyu")">
+                            @(bos.BosKadar.HasValue ? $"Sonraki ders {Saat(bos.BosKadar.Value)}" : "Bugün boş")
+                        </div>
+                        @if (bos.Derslik.Mekan != null)
+                        {
+                            <a asp-page="/Kampus/Harita" asp-route-mekan="@bos.Derslik.Mekan.Id" class="derslik-harita-link">
+                                <i class="bi bi-geo-alt"></i> Haritada göster
+                            </a>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </section>
+}
+else
+{
+    <div class="panel-kart derslerim mb-4">
+        <div class="derslerim-ust">
+            <h2 class="derslerim-baslik">Derslerim <span>@Model.SeciliDersler.Count</span></h2>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#dersSecici">
+                <i class="bi bi-plus-lg"></i> @(Model.SeciliDersler.Count == 0 ? "Ders seç" : "Düzenle")
+            </button>
+        </div>
+
+        @if (Model.SeciliDersler.Count == 0)
+        {
+            <p class="derslerim-bos">Aldığın dersleri seç; haftalık programın, derslerin nerede olduğu ve sınavların burada görünsün.</p>
+        }
+        else
+        {
+            <div class="ders-cipleri">
+                @foreach (var secili in Model.SeciliDersler)
+                {
+                    <form method="post" asp-page-handler="Cikar" class="ders-cip">
+                        <span class="ders-cip-kod">@secili.Kod</span>
+                        @if (secili.DersAdi != secili.Kod)
+                        {
+                            <span class="ders-cip-ad">@secili.DersAdi</span>
+                        }
+                        <input type="hidden" name="kod" value="@secili.Kod" />
+                        <button type="submit" class="ders-cip-sil" aria-label="@secili.Kod dersini çıkar" title="Çıkar">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </form>
+                }
+            </div>
+        }
+    </div>
+
+    if (Model.SeciliDersler.Count > 0)
+    {
+        if (Model.SuAnkiDers != null || Model.SiradakiDers != null)
+        {
+            <div class="panel-kart simdi-kart mb-4">
+                @foreach (var (etiket, ders) in new[] { ("Şu an", Model.SuAnkiDers), ("Sıradaki", Model.SiradakiDers) })
+                {
+                    if (ders == null)
+                    {
+                        continue;
+                    }
+                    <div class="simdi-satir">
+                        <span class="simdi-etiket @(etiket == "Şu an" ? "canli" : "")">@etiket</span>
+                        <div class="flex-grow-1">
+                            <div class="simdi-ders">
+                                @ders.Kod
+                                @if (DersAdiFarkli(ders))
+                                {
+                                    <span class="fw-normal">· @ders.DersAdi</span>
+                                }
+                                @if (ders.LabMi)
+                                {
+                                    <span class="badge rozet-kullanici ms-1">Lab</span>
+                                }
+                            </div>
+                            <div class="duyuru-bilgi">
+                                <i class="bi bi-clock"></i>
+                                @if (etiket == "Şu an")
+                                {
+                                    <text>Bitiş @Saat(ders.BitisSaati)</text>
+                                }
+                                else
+                                {
+                                    <text>@GunEtiketi(ders.Gun), @Saat(ders.BaslangicSaati)-@Saat(ders.BitisSaati)</text>
+                                }
+                            </div>
+                        </div>
+                        <partial name="_DerslikKonumu" model="ders.Derslik" />
+                    </div>
+                }
+            </div>
+        }
+
+        <section class="bolum">
+            <h2 class="bolum-baslik">Haftalık Program</h2>
+
+            <div class="panel-kart p-0 cizelge d-none d-md-grid"
+                 style="--gun-sayisi: @Model.Gunler.Count; --saat-sayisi: @((Model.CizelgeBitis - Model.CizelgeBaslangic).TotalHours.ToString(CultureInfo.InvariantCulture))">
+                <div class="cizelge-saatler">
+                    <div class="cizelge-gun-baslik"></div>
+                    <div class="cizelge-govde">
+                        @for (var saat = Model.CizelgeBaslangic; saat < Model.CizelgeBitis; saat = saat.AddHours(1))
+                        {
+                            <span class="cizelge-saat" style="top: @Model.DikeyKonum(saat).ToString(CultureInfo.InvariantCulture)%">@Saat(saat)</span>
+                        }
+                    </div>
+                </div>
+
+                @foreach (var gun in Model.Gunler)
+                {
+                    <div class="cizelge-gun @(gun == Model.Bugun ? "bugun" : "")">
+                        <div class="cizelge-gun-baslik">
+                            @GunAdi(gun)
+                            @if (gun == Model.Bugun)
+                            {
+                                <span class="cizelge-bugun-rozet">Bugün</span>
+                            }
+                        </div>
+                        <div class="cizelge-govde">
+                            @if (gun == Model.Bugun && Model.SuAnkiSaat > Model.CizelgeBaslangic && Model.SuAnkiSaat < Model.CizelgeBitis)
+                            {
+                                <span class="cizelge-simdi" style="top: @Model.DikeyKonum(Model.SuAnkiSaat).ToString(CultureInfo.InvariantCulture)%"></span>
+                            }
+                            @foreach (var ders in Model.Dersler.Where(d => d.Gun == gun))
+                            {
+                                var ust = Model.DikeyKonum(ders.BaslangicSaati).ToString(CultureInfo.InvariantCulture);
+                                var yukseklik = (Model.DikeyKonum(ders.BitisSaati) - Model.DikeyKonum(ders.BaslangicSaati)).ToString(CultureInfo.InvariantCulture);
+                                var sinif = $"cizelge-ders{(ders.LabMi ? " lab" : "")}{(ders == Model.SuAnkiDers ? " simdi" : "")}";
+                                var aciklama = $"{ders.Kod} {ders.DersAdi} · {Saat(ders.BaslangicSaati)}-{Saat(ders.BitisSaati)} · {ders.Derslik?.Ad ?? "Derslik belirtilmemiş"}{(ders.Derslik?.Mekan != null ? " (" + ders.Derslik.Mekan.Ad + ")" : "")}";
+
+                                if (ders.Derslik?.Mekan != null)
+                                {
+                                    <a asp-page="/Kampus/Harita" asp-route-mekan="@ders.Derslik.Mekan.Id" class="@sinif"
+                                       style="top: @ust%; height: @yukseklik%" title="@aciklama">
+                                        <span class="cizelge-ders-kod">@ders.Kod @(ders.LabMi ? "Lab" : "")</span>
+                                        <span class="cizelge-ders-saat">@Saat(ders.BaslangicSaati)-@Saat(ders.BitisSaati)</span>
+                                        <span class="cizelge-ders-yer"><i class="bi bi-geo-alt"></i> @ders.Derslik.Ad</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <div class="@sinif" style="top: @ust%; height: @yukseklik%" title="@aciklama">
+                                        <span class="cizelge-ders-kod">@ders.Kod @(ders.LabMi ? "Lab" : "")</span>
+                                        <span class="cizelge-ders-saat">@Saat(ders.BaslangicSaati)-@Saat(ders.BitisSaati)</span>
+                                        <span class="cizelge-ders-yer">@(ders.Derslik?.Not ?? ders.Derslik?.Ad ?? "Derslik belirtilmemiş")</span>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="d-md-none">
+                <div class="harita-filtre gun-sekmeleri" role="tablist" aria-label="Gün seçimi">
+                    @foreach (var gun in Model.Gunler)
+                    {
+                        <button type="button" class="filtre-dugme @(gun == acikGun ? "aktif" : "")" data-gun="@((int)gun)"
+                                role="tab" aria-selected="@(gun == acikGun ? "true" : "false")">@GunKisa(gun)</button>
+                    }
+                </div>
+
+                @foreach (var gun in Model.Gunler)
+                {
+                    var gununDersleri = Model.Dersler.Where(d => d.Gun == gun).ToList();
+                    <div class="panel-kart p-0" data-gun-paneli="@((int)gun)" hidden="@(gun != acikGun)">
+                        @if (gununDersleri.Count == 0)
+                        {
+                            <div class="bos-durum py-4">
+                                <i class="bi bi-cup-hot"></i>
+                                <h3>@GunAdi(gun) ders yok</h3>
+                            </div>
+                        }
+                        @foreach (var ders in gununDersleri)
+                        {
+                            <div class="duyuru">
+                                <div class="ders-saat">
+                                    <span class="ders-saat-deger">@Saat(ders.BaslangicSaati)</span>
+                                    <span class="ders-saat-bitis">@Saat(ders.BitisSaati)</span>
+                                </div>
+                                <div class="duyuru-icerik flex-grow-1">
+                                    <h3 class="duyuru-baslik">
+                                        @ders.Kod
+                                        @if (ders.LabMi)
+                                        {
+                                            <span class="badge rozet-kullanici ms-1">Lab</span>
+                                        }
+                                    </h3>
+                                    @if (DersAdiFarkli(ders))
+                                    {
+                                        <div class="duyuru-bilgi">@ders.DersAdi</div>
+                                    }
+                                </div>
+                                <partial name="_DerslikKonumu" model="ders.Derslik" />
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </section>
+
+        <section class="bolum">
+            <h2 class="bolum-baslik">Yaklaşan Sınavlar</h2>
+            <partial name="_SinavListesi" model="Model.Sinavlar" />
+        </section>
+    }
+}
+
+@if (!Model.BosDersliklerSekmesi)
+{
+    <div class="modal fade" id="dersSecici" tabindex="-1" aria-labelledby="dersSeciciBaslik" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <form method="post" asp-page-handler="Kaydet" class="modal-content ders-secici">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="dersSeciciBaslik">Ders Seç</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="ders-secici-arama">
+                    <div class="ikonlu-girdi">
+                        <i class="bi bi-search"></i>
+                        <input type="search" class="form-control" id="dersAra" placeholder="Ders kodu ya da adı" aria-label="Ders ara" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="modal-body p-0">
+                    @foreach (var grup in Model.Katalog.GroupBy(d => d.Grup)
+                        .OrderBy(g => g.Key.StartsWith("Türkçe") ? 0 : 1).ThenBy(g => g.Key))
+                    {
+                        var grupNo = Array.IndexOf(Model.Katalog.Select(d => d.Grup).Distinct().ToArray(), grup.Key);
+                        var seciliSayi = grup.Count(d => Model.SeciliDersler.Any(s => s.Kod == d.Kod));
+                        <div class="ders-grubu">
+                            <button type="button" class="ders-grubu-baslik collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#dersGrubu@(grupNo)" aria-expanded="false" aria-controls="dersGrubu@(grupNo)">
+                                <span class="flex-grow-1">@Model.BolumAdi @grup.Key</span>
+                                <span class="ders-grubu-sayi" data-secili-sayi hidden="@(seciliSayi == 0)">@seciliSayi</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <div class="collapse" id="dersGrubu@(grupNo)">
+                                @foreach (var ders in grup.OrderBy(d => d.Kod))
+                                {
+                                    var secili = Model.SeciliDersler.Any(s => s.Kod == ders.Kod);
+                                    <label class="ders-secenek" data-ara="@($"{ders.Kod} {ders.DersAdi}".ToLower(tr))">
+                                        <input type="checkbox" class="form-check-input" name="kodlar" value="@ders.Kod" checked="@secili" />
+                                        <span class="ders-secenek-metin">
+                                            <span class="ders-secenek-kod">@ders.Kod</span>
+                                            @if (ders.DersAdi != ders.Kod)
+                                            {
+                                                <span class="ders-secenek-ad">@ders.DersAdi</span>
+                                            }
+                                        </span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    }
+                    <p class="ders-secici-sonuc-yok" hidden>Eşleşen ders yok.</p>
+                </div>
+                <div class="modal-footer">
+                    <span class="ders-secici-sayac me-auto"><span id="seciliSayisi">@Model.SeciliDersler.Count</span> ders seçili</span>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        var aramaKutusu = document.getElementById("dersAra");
+        if (aramaKutusu) {
+            var gruplar = document.querySelectorAll(".ders-grubu");
+            var sonucYok = document.querySelector(".ders-secici-sonuc-yok");
+
+            function grubuAc(grup, acik) {
+                var govde = grup.querySelector(".collapse");
+                bootstrap.Collapse.getOrCreateInstance(govde, { toggle: false })[acik ? "show" : "hide"]();
+            }
+
+            aramaKutusu.addEventListener("input", function () {
+                var aranan = aramaKutusu.value.trim().toLocaleLowerCase("tr");
+                var toplam = 0;
+                gruplar.forEach(function (grup) {
+                    var gorunen = 0;
+                    grup.querySelectorAll(".ders-secenek").forEach(function (secenek) {
+                        var eslesti = secenek.dataset.ara.indexOf(aranan) !== -1;
+                        secenek.hidden = !eslesti;
+                        if (eslesti) gorunen++;
+                    });
+                    grup.hidden = gorunen === 0;
+                    grubuAc(grup, aranan.length > 0 && gorunen > 0);
+                    toplam += gorunen;
+                });
+                sonucYok.hidden = toplam > 0;
+            });
+
+            document.querySelectorAll(".ders-secenek input").forEach(function (kutu) {
+                kutu.addEventListener("change", function () {
+                    var grup = kutu.closest(".ders-grubu");
+                    var rozet = grup.querySelector("[data-secili-sayi]");
+                    var sayi = grup.querySelectorAll("input:checked").length;
+                    rozet.textContent = sayi;
+                    rozet.hidden = sayi === 0;
+                    document.getElementById("seciliSayisi").textContent =
+                        document.querySelectorAll(".ders-secenek input:checked").length;
+                });
+            });
+
+            document.getElementById("dersSecici").addEventListener("shown.bs.modal", function () {
+                aramaKutusu.focus();
+            });
+        }
+
+        document.querySelectorAll(".gun-sekmeleri .filtre-dugme").forEach(function (dugme) {
+            dugme.addEventListener("click", function () {
+                document.querySelectorAll(".gun-sekmeleri .filtre-dugme").forEach(function (d) {
+                    d.classList.toggle("aktif", d === dugme);
+                    d.setAttribute("aria-selected", d === dugme ? "true" : "false");
+                });
+                document.querySelectorAll("[data-gun-paneli]").forEach(function (panel) {
+                    panel.hidden = panel.dataset.gunPaneli !== dugme.dataset.gun;
+                });
+            });
+        });
+    </script>
+}

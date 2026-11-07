@@ -28,5 +28,7 @@ namespace KampusPortali.Models
         [StringLength(500, ErrorMessage = "Açıklama en fazla {1} karakter olabilir.")]
         [Display(Name = "Açıklama")]
         public string? Aciklama { get; set; }
+
+        public ICollection<Derslik> Derslikler { get; set; } = new List<Derslik>();
     }
 }

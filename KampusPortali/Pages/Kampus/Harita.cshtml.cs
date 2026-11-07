@@ -24,6 +24,7 @@ namespace KampusPortali.Pages.Kampus
         public async Task OnGetAsync()
         {
             Mekanlar = await _context.Mekanlar
+                .Include(m => m.Derslikler)
                 .OrderBy(m => m.Ad)
                 .ToListAsync();
 
@@ -43,6 +44,7 @@ namespace KampusPortali.Pages.Kampus
                 enlem = m.Enlem,
                 boylam = m.Boylam,
                 aciklama = m.Aciklama,
+                derslikler = m.Derslikler.Select(d => d.Ad).OrderBy(a => a).ToList(),
                 geometri = m.Geometri == null ? (JsonElement?)null : JsonDocument.Parse(m.Geometri).RootElement.Clone()
             }));
         }

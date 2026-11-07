@@ -23,13 +23,15 @@
 </div>
 
 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
-    <div class="btn-group" role="group" aria-label="İlanları filtrele">
+    <div class="harita-filtre mb-0" role="group" aria-label="İlanları filtrele">
         <a asp-page="/Kampus/KayipEsya"
-           class="btn btn-sm @(Model.Bekleyenler ? "btn-outline-secondary" : "btn-primary")">
+           class="filtre-dugme @(Model.Bekleyenler ? "" : "aktif")"
+           aria-current="@(Model.Bekleyenler ? null : "page")">
             <i class="bi bi-list-ul"></i> Tümü
         </a>
         <a asp-page="/Kampus/KayipEsya" asp-route-bekleyenler="true"
-           class="btn btn-sm @(Model.Bekleyenler ? "btn-primary" : "btn-outline-secondary")">
+           class="filtre-dugme @(Model.Bekleyenler ? "aktif" : "")"
+           aria-current="@(Model.Bekleyenler ? "page" : null)">
             <i class="bi bi-hourglass-split"></i> Bekleyenler
         </a>
     </div>

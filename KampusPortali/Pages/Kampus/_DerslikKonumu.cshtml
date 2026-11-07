@@ -1,0 +1,23 @@
+@model Derslik?
+
+<div class="derslik-konumu">
+    @if (Model == null)
+    {
+        <span class="derslik-ad text-muted">Derslik belirtilmemiş</span>
+    }
+    else
+    {
+        <span class="derslik-ad"><i class="bi bi-door-open"></i> @Model.Ad</span>
+        @if (Model.Mekan != null)
+        {
+            <span class="derslik-bina">@Model.Mekan.Ad</span>
+            <a asp-page="/Kampus/Harita" asp-route-mekan="@Model.Mekan.Id" class="derslik-harita-link">
+                <i class="bi bi-geo-alt"></i> Haritada göster
+            </a>
+        }
+        else if (!string.IsNullOrEmpty(Model.Not))
+        {
+            <span class="derslik-bina">@Model.Not</span>
+        }
+    }
+</div>

@@ -1,0 +1,39 @@
+@model List<Sinav>
+@using System.Globalization
+@{
+    var tr = new CultureInfo("tr-TR");
+}
+
+@if (Model.Count == 0)
+{
+    <div class="panel-kart bos-durum">
+        <i class="bi bi-journal-check"></i>
+        <h3>Sınav takvimi henüz eklenmedi</h3>
+        <p class="mb-0">Sınav tarihleri açıklandığında burada listelenecek.</p>
+    </div>
+}
+else
+{
+    <div class="panel-kart p-0">
+        @foreach (var sinav in Model)
+        {
+            <div class="duyuru">
+                <div class="duyuru-tarih">
+                    <span class="duyuru-gun">@sinav.Tarih.Day</span>
+                    <span class="duyuru-ay">@sinav.Tarih.ToString("MMM", tr)</span>
+                </div>
+                <div class="duyuru-icerik flex-grow-1">
+                    <h3 class="duyuru-baslik">
+                        @sinav.DersKodu
+                        <span class="badge rozet-onemli ms-1">@sinav.Tur.GorunenAd()</span>
+                    </h3>
+                    <div class="duyuru-bilgi">
+                        <i class="bi bi-calendar-event"></i> @sinav.Tarih.ToString("d MMMM yyyy, dddd", tr)
+                        &middot; <i class="bi bi-clock"></i> @sinav.BaslangicSaati.ToString("HH:mm")-@sinav.BitisSaati.ToString("HH:mm")
+                    </div>
+                </div>
+                <partial name="_DerslikKonumu" model="sinav.Derslik" />
+            </div>
+        }
+    </div>
+}

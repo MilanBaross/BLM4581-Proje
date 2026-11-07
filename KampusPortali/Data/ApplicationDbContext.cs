@@ -19,6 +19,8 @@ namespace KampusPortali.Data
         public DbSet<KayipEsya> KayipEsyalar { get; set; }
         public DbSet<Duyuru> Duyurular { get; set; }
         public DbSet<Mekan> Mekanlar { get; set; }
+        public DbSet<Sinav> Sinavlar { get; set; }
+        public DbSet<KullaniciDersi> KullaniciDersleri { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,6 +57,53 @@ namespace KampusPortali.Data
 
             modelBuilder.Entity<Mekan>()
                 .HasData(MekanTohumVerisi.Mekanlar);
+
+            modelBuilder.Entity<Derslik>()
+                .HasOne(d => d.Mekan)
+                .WithMany(m => m.Derslikler)
+                .HasForeignKey(d => d.MekanId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Derslik>()
+                .Property(d => d.Id)
+                .HasIdentityOptions(startValue: 100);
+
+            modelBuilder.Entity<Derslik>()
+                .HasData(DersProgramiTohumVerisi.Derslikler);
+
+            modelBuilder.Entity<Ders>()
+                .HasIndex(d => d.Kod);
+
+            modelBuilder.Entity<Ders>()
+                .Property(d => d.Id)
+                .HasIdentityOptions(startValue: 1000);
+
+            modelBuilder.Entity<Ders>()
+                .HasData(DersProgramiTohumVerisi.Dersler);
+
+            modelBuilder.Entity<Sinav>()
+                .Property(s => s.Tur)
+                .HasConversion<string>()
+                .HasMaxLength(20);
+
+            modelBuilder.Entity<Sinav>()
+                .HasIndex(s => s.DersKodu);
+
+            modelBuilder.Entity<Sinav>()
+                .HasOne(s => s.Derslik)
+                .WithMany(d => d.Sinavlar)
+                .HasForeignKey(s => s.DerslikId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<KullaniciDersi>()
+                .HasIndex(k => new { k.KullaniciId, k.DersKodu })
+                .IsUnique();
+
+            modelBuilder.Entity<KullaniciDersi>()
+                .HasOne(k => k.Kullanici)
+                .WithMany()
+                .HasForeignKey(k => k.KullaniciId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Derslik veya akademisyen silinirse bağlı dersler sessizce silinmesin.
             modelBuilder.Entity<Ders>()

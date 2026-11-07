@@ -109,6 +109,13 @@
             kutu.appendChild(aciklama);
         }
 
+        if (mekan.derslikler && mekan.derslikler.length > 0) {
+            const derslikler = document.createElement('p');
+            derslikler.className = 'harita-popup-derslikler';
+            derslikler.textContent = 'Derslikler: ' + mekan.derslikler.join(', ');
+            kutu.appendChild(derslikler);
+        }
+
         return kutu;
     }
 
@@ -149,6 +156,7 @@
     }
 
     function ciz() {
+        const oncekiSecili = seciliKayit;
         binaKatmani.clearLayers();
         isaretKatmani.clearLayers();
         etiketKatmani.clearLayers();
@@ -220,6 +228,11 @@
                 oge.kayit.catilar.push({ sekil: cati, renk: oge.renk.cati });
             }
         });
+
+        if (oncekiSecili && oncekiSecili.catilar.length > 0) {
+            oncekiSecili.catilar.forEach(function (c) { c.sekil.setStyle({ fillColor: '#f2c94c', weight: 2 }); });
+            seciliKayit = oncekiSecili;
+        }
     }
 
     function binaSec(kayit, uc) {
@@ -267,6 +280,11 @@
 
     ciz();
     etiketleriGuncelle();
+
+    const istenenMekan = kayitlar.get(Number(new URLSearchParams(window.location.search).get('mekan')));
+    if (istenenMekan && istenenMekan.sinir) {
+        binaSec(istenenMekan, true);
+    }
 
     fetch('/data/kampus_diger_binalar.geojson')
         .then(function (yanit) { return yanit.ok ? yanit.json() : null; })

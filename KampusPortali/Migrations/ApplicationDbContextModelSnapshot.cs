@@ -62,8 +62,9 @@ namespace KampusPortali.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 1000L, null, null, null, null, null);
 
-                    b.Property<int>("AkademisyenId")
+                    b.Property<int?>("AkademisyenId")
                         .HasColumnType("integer");
 
                     b.Property<TimeOnly>("BaslangicSaati")
@@ -77,11 +78,24 @@ namespace KampusPortali.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<int>("DerslikId")
+                    b.Property<int?>("DerslikId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Grup")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<int>("Gun")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Kod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<bool>("LabMi")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
@@ -89,7 +103,778 @@ namespace KampusPortali.Migrations
 
                     b.HasIndex("DerslikId");
 
+                    b.HasIndex("Kod");
+
                     b.ToTable("Dersler");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 20, 0),
+                            DersAdi = "COMPUTER PROGRAMMING I",
+                            DerslikId = 1,
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 1,
+                            Kod = "COM1007",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(17, 20, 0),
+                            DersAdi = "DEVELOPMENT OF READING AND WRITING SKILLS IN ENGLISH I",
+                            DerslikId = 4,
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 1,
+                            Kod = "ENG101",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(17, 20, 0),
+                            DersAdi = "PHYSICS I",
+                            DerslikId = 12,
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 2,
+                            Kod = "PHY0105",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 20, 0),
+                            DersAdi = "COMPUTER PROGRAMMING I",
+                            DerslikId = 10,
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 3,
+                            Kod = "COM1007",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 20, 0),
+                            DersAdi = "COMPUTER PROGRAMMING I",
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 4,
+                            Kod = "COM1007",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(18, 20, 0),
+                            DersAdi = "COM1015",
+                            DerslikId = 2,
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 4,
+                            Kod = "COM1015",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "PHYSICS I",
+                            DerslikId = 8,
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 5,
+                            Kod = "PHY0105",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(17, 20, 0),
+                            DersAdi = "CALCULUS I",
+                            DerslikId = 8,
+                            Grup = "İngilizce 1. Sınıf",
+                            Gun = 5,
+                            Kod = "MTH0143",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BaslangicSaati = new TimeOnly(8, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "ADVANCED READING AND COMMUNICATION TECHNIQUES IN ENGLISH I",
+                            DerslikId = 4,
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 1,
+                            Kod = "ENG201",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "COM2077",
+                            DerslikId = 1,
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 1,
+                            Kod = "COM2077",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "COM2039",
+                            DerslikId = 1,
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 2,
+                            Kod = "COM2039",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "COM2067",
+                            DerslikId = 2,
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 2,
+                            Kod = "COM2067",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 13,
+                            BaslangicSaati = new TimeOnly(16, 30, 0),
+                            BitisSaati = new TimeOnly(18, 20, 0),
+                            DersAdi = "COM2067 Laboratuvarı",
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 2,
+                            Kod = "COM2067",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 14,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 20, 0),
+                            DersAdi = "COM2077 Laboratuvarı",
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 3,
+                            Kod = "COM2077",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "COM2501",
+                            DerslikId = 2,
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 3,
+                            Kod = "COM2501",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 16,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(18, 20, 0),
+                            DersAdi = "COM2043",
+                            DerslikId = 1,
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 4,
+                            Kod = "COM2043",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 17,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "COM2043 Laboratuvarı",
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 5,
+                            Kod = "COM2043",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 18,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "FILE ORGANIZATION",
+                            DerslikId = 11,
+                            Grup = "İngilizce 2. Sınıf",
+                            Gun = 5,
+                            Kod = "COM2553",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 19,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "COM3533",
+                            DerslikId = 3,
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 1,
+                            Kod = "COM3533",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 20,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "COM3023",
+                            DerslikId = 4,
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 3,
+                            Kod = "COM3023",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 21,
+                            BaslangicSaati = new TimeOnly(14, 0, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "COM3033",
+                            DerslikId = 1,
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 3,
+                            Kod = "COM3033",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 22,
+                            BaslangicSaati = new TimeOnly(10, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "COM3073",
+                            DerslikId = 9,
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 4,
+                            Kod = "COM3073",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 23,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "COM3033 Laboratuvarı",
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 4,
+                            Kod = "COM3033",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 24,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "COM3551",
+                            DerslikId = 1,
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 5,
+                            Kod = "COM3551",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 25,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "COM3067",
+                            DerslikId = 2,
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 5,
+                            Kod = "COM3067",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 26,
+                            BaslangicSaati = new TimeOnly(16, 30, 0),
+                            BitisSaati = new TimeOnly(18, 20, 0),
+                            DersAdi = "COM3067 Laboratuvarı",
+                            Grup = "İngilizce 3. Sınıf",
+                            Gun = 5,
+                            Kod = "COM3067",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 27,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "INFORMATION SYSTEMS",
+                            DerslikId = 3,
+                            Grup = "İngilizce 4. Sınıf",
+                            Gun = 2,
+                            Kod = "COM4567",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 28,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "COM4541",
+                            DerslikId = 4,
+                            Grup = "İngilizce 4. Sınıf",
+                            Gun = 2,
+                            Kod = "COM4541",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 29,
+                            BaslangicSaati = new TimeOnly(10, 0, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "ARTIFICIAL NEURAL NETWORKS",
+                            DerslikId = 4,
+                            Grup = "İngilizce 4. Sınıf",
+                            Gun = 4,
+                            Kod = "COM4573",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 30,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(18, 20, 0),
+                            DersAdi = "DATA MINING",
+                            DerslikId = 4,
+                            Grup = "İngilizce 4. Sınıf",
+                            Gun = 4,
+                            Kod = "COM4569",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 31,
+                            BaslangicSaati = new TimeOnly(10, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "Matematik I",
+                            DerslikId = 2,
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 1,
+                            Kod = "MAT0143",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 32,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 20, 0),
+                            DersAdi = "Matematik I",
+                            DerslikId = 2,
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 1,
+                            Kod = "MAT0143",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 33,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(17, 20, 0),
+                            DersAdi = "Bilgisayar Programlama I",
+                            DerslikId = 2,
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 1,
+                            Kod = "BLM1007",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 34,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 20, 0),
+                            DersAdi = "Bilgisayar Programlama I",
+                            DerslikId = 2,
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 2,
+                            Kod = "BLM1007",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 35,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 20, 0),
+                            DersAdi = "Fizik I",
+                            DerslikId = 12,
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 2,
+                            Kod = "FZM0105",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 36,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "Fizik I",
+                            DerslikId = 9,
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 3,
+                            Kod = "FZM0105",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 37,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM1015",
+                            DerslikId = 1,
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 4,
+                            Kod = "BLM1015",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 38,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 20, 0),
+                            DersAdi = "Bilgisayar Programlama I",
+                            Grup = "Türkçe 1. Sınıf",
+                            Gun = 5,
+                            Kod = "BLM1007",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 39,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 20, 0),
+                            DersAdi = "BLM2077 Laboratuvarı",
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 2,
+                            Kod = "BLM2077",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 40,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM2501",
+                            DerslikId = 6,
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 2,
+                            Kod = "BLM2501",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 41,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM2043",
+                            DerslikId = 2,
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 3,
+                            Kod = "BLM2043",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 42,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 20, 0),
+                            DersAdi = "BLM2043 Laboratuvarı",
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 3,
+                            Kod = "BLM2043",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 43,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(17, 20, 0),
+                            DersAdi = "BLM2067 Laboratuvarı",
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 3,
+                            Kod = "BLM2067",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 44,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM2067",
+                            DerslikId = 2,
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 4,
+                            Kod = "BLM2067",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 45,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM2537",
+                            DerslikId = 1,
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 4,
+                            Kod = "BLM2537",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 46,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM2077",
+                            DerslikId = 2,
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 5,
+                            Kod = "BLM2077",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 47,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM2039",
+                            DerslikId = 4,
+                            Grup = "Türkçe 2. Sınıf",
+                            Gun = 5,
+                            Kod = "BLM2039",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 48,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 20, 0),
+                            DersAdi = "BLM3023 Laboratuvarı",
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 1,
+                            Kod = "BLM3023",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 49,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 20, 0),
+                            DersAdi = "BLM3033 Laboratuvarı",
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 1,
+                            Kod = "BLM3033",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 50,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(17, 20, 0),
+                            DersAdi = "BLM3067 Laboratuvarı",
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 1,
+                            Kod = "BLM3067",
+                            LabMi = true
+                        },
+                        new
+                        {
+                            Id = 51,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM3557",
+                            DerslikId = 4,
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 2,
+                            Kod = "BLM3557",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 52,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM3033",
+                            DerslikId = 1,
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 2,
+                            Kod = "BLM3033",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 53,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM3067",
+                            DerslikId = 1,
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 3,
+                            Kod = "BLM3067",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 54,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM3533",
+                            DerslikId = 4,
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 3,
+                            Kod = "BLM3533",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 55,
+                            BaslangicSaati = new TimeOnly(14, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM3073",
+                            DerslikId = 9,
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 4,
+                            Kod = "BLM3073",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 56,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM3551",
+                            DerslikId = 4,
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 5,
+                            Kod = "BLM3551",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 57,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM3023",
+                            DerslikId = 1,
+                            Grup = "Türkçe 3. Sınıf",
+                            Gun = 5,
+                            Kod = "BLM3023",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 58,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM4551",
+                            DerslikId = 7,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 1,
+                            Kod = "BLM4551",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 59,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "Yapay Sinir Ağları",
+                            DerslikId = 3,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 1,
+                            Kod = "BLM4573",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 60,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM4583",
+                            DerslikId = 5,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 2,
+                            Kod = "BLM4583",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 61,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM4541",
+                            DerslikId = 3,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 2,
+                            Kod = "BLM4541",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 62,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "Ağ Tabanlı Teknolojiler ve Uygulamaları",
+                            DerslikId = 3,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 3,
+                            Kod = "BLM4581",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 63,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM4587",
+                            DerslikId = 3,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 3,
+                            Kod = "BLM4587",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 64,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(12, 20, 0),
+                            DersAdi = "BLM4559",
+                            DerslikId = 3,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 5,
+                            Kod = "BLM4559",
+                            LabMi = false
+                        },
+                        new
+                        {
+                            Id = 65,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(16, 20, 0),
+                            DersAdi = "BLM4561",
+                            DerslikId = 3,
+                            Grup = "Türkçe 4. Sınıf",
+                            Gun = 5,
+                            Kod = "BLM4561",
+                            LabMi = false
+                        });
                 });
 
             modelBuilder.Entity("KampusPortali.Models.Derslik", b =>
@@ -99,34 +884,131 @@ namespace KampusPortali.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 100L, null, null, null, null, null);
 
                     b.Property<string>("Ad")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Blok")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
-                    b.Property<int>("Kapasite")
+                    b.Property<int?>("Kapasite")
                         .HasColumnType("integer");
 
                     b.Property<string>("Kat")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
+                    b.Property<int?>("MekanId")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("MusaitMi")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("Not")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Ad")
                         .IsUnique();
 
+                    b.HasIndex("MekanId");
+
                     b.ToTable("Derslikler");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ad = "Derslik 1",
+                            MekanId = 2,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ad = "Derslik 2",
+                            MekanId = 2,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ad = "Derslik 3",
+                            MekanId = 2,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Ad = "Derslik 4",
+                            MekanId = 2,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Ad = "LAB 1",
+                            MekanId = 2,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Ad = "LAB 3",
+                            MekanId = 2,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Ad = "Android Dersliği",
+                            MekanId = 2,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Ad = "Yapay Zeka Dersliği H1",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Bölümü dersliği"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Ad = "Yapay Zeka Dersliği J2",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Bölümü dersliği"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Ad = "BME2 Dersliği",
+                            MekanId = 6,
+                            MusaitMi = true,
+                            Not = "Biyomedikal Mühendisliği Bölümü dersliği"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Ad = "Yazılım Mühendisliği Dersliği 7",
+                            MekanId = 3,
+                            MusaitMi = true
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Ad = "D Blok Servis Lab",
+                            MusaitMi = true,
+                            Not = "Tandoğan Yerleşkesi"
+                        });
                 });
 
             modelBuilder.Entity("KampusPortali.Models.Duyuru", b =>
@@ -323,6 +1205,30 @@ namespace KampusPortali.Migrations
                         .IsUnique();
 
                     b.ToTable("Kullanicilar", (string)null);
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.KullaniciDersi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DersKodu")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<int>("KullaniciId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KullaniciId", "DersKodu")
+                        .IsUnique();
+
+                    b.ToTable("KullaniciDersleri");
                 });
 
             modelBuilder.Entity("KampusPortali.Models.KutuphaneMasasi", b =>
@@ -634,6 +1540,45 @@ namespace KampusPortali.Migrations
                         });
                 });
 
+            modelBuilder.Entity("KampusPortali.Models.Sinav", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<TimeOnly>("BaslangicSaati")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<TimeOnly>("BitisSaati")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<string>("DersKodu")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<int?>("DerslikId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly>("Tarih")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Tur")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DersKodu");
+
+                    b.HasIndex("DerslikId");
+
+                    b.ToTable("Sinavlar");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -771,18 +1716,26 @@ namespace KampusPortali.Migrations
                     b.HasOne("KampusPortali.Models.Akademisyen", "Akademisyen")
                         .WithMany("Dersler")
                         .HasForeignKey("AkademisyenId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("KampusPortali.Models.Derslik", "Derslik")
                         .WithMany("Dersler")
                         .HasForeignKey("DerslikId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Akademisyen");
 
                     b.Navigation("Derslik");
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.Derslik", b =>
+                {
+                    b.HasOne("KampusPortali.Models.Mekan", "Mekan")
+                        .WithMany("Derslikler")
+                        .HasForeignKey("MekanId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Mekan");
                 });
 
             modelBuilder.Entity("KampusPortali.Models.Duyuru", b =>
@@ -806,6 +1759,17 @@ namespace KampusPortali.Migrations
                     b.Navigation("BildirenKullanici");
                 });
 
+            modelBuilder.Entity("KampusPortali.Models.KullaniciDersi", b =>
+                {
+                    b.HasOne("KampusPortali.Models.Kullanici", "Kullanici")
+                        .WithMany()
+                        .HasForeignKey("KullaniciId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kullanici");
+                });
+
             modelBuilder.Entity("KampusPortali.Models.KutuphaneMasasi", b =>
                 {
                     b.HasOne("KampusPortali.Models.Kullanici", "RezerveEdenKullanici")
@@ -814,6 +1778,16 @@ namespace KampusPortali.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("RezerveEdenKullanici");
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.Sinav", b =>
+                {
+                    b.HasOne("KampusPortali.Models.Derslik", "Derslik")
+                        .WithMany("Sinavlar")
+                        .HasForeignKey("DerslikId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Derslik");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -875,6 +1849,8 @@ namespace KampusPortali.Migrations
             modelBuilder.Entity("KampusPortali.Models.Derslik", b =>
                 {
                     b.Navigation("Dersler");
+
+                    b.Navigation("Sinavlar");
                 });
 
             modelBuilder.Entity("KampusPortali.Models.Kullanici", b =>
@@ -884,6 +1860,11 @@ namespace KampusPortali.Migrations
                     b.Navigation("Duyurular");
 
                     b.Navigation("RezerveMasalar");
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.Mekan", b =>
+                {
+                    b.Navigation("Derslikler");
                 });
 #pragma warning restore 612, 618
         }
