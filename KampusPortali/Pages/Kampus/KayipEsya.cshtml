@@ -1,7 +1,81 @@
 @page
+@model KampusPortali.Pages.Kampus.KayipEsyaModel
+@using System.Globalization
 @{
     var modul = Moduller.KayipEsya;
     ViewData["Title"] = modul.Baslik;
+    var tr = new CultureInfo("tr-TR");
 }
 
-<partial name="_ModulIskeleti" model="modul" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@modul.Baslik</li>
+    </ol>
+</nav>
+
+<div class="modul-ust">
+    <span class="modul-ust-ikon"><i class="bi @modul.Ikon"></i></span>
+    <div>
+        <h1>@modul.Baslik</h1>
+        <p class="mb-0">@modul.Aciklama</p>
+    </div>
+</div>
+
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+    <div class="btn-group" role="group" aria-label="İlanları filtrele">
+        <a asp-page="/Kampus/KayipEsya"
+           class="btn btn-sm @(Model.Bekleyenler ? "btn-outline-secondary" : "btn-primary")">
+            <i class="bi bi-list-ul"></i> Tümü
+        </a>
+        <a asp-page="/Kampus/KayipEsya" asp-route-bekleyenler="true"
+           class="btn btn-sm @(Model.Bekleyenler ? "btn-primary" : "btn-outline-secondary")">
+            <i class="bi bi-hourglass-split"></i> Bekleyenler
+        </a>
+    </div>
+    <a asp-page="/Kampus/KayipEsyaForm" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> İlan Ekle
+    </a>
+</div>
+
+@if (Model.Ilanlar.Count == 0)
+{
+    <div class="panel-kart bos-durum">
+        <i class="bi bi-search"></i>
+        <h2>@(Model.Bekleyenler ? "Bekleyen ilan yok" : "Henüz ilan yok")</h2>
+        <p class="mb-0">Bulduğunuz bir eşyayı "İlan Ekle" butonuyla bildirebilirsiniz.</p>
+    </div>
+}
+else
+{
+    <div class="panel-kart p-0">
+        @foreach (var ilan in Model.Ilanlar)
+        {
+            var tarih = ilan.BulunmaTarihi.ToLocalTime();
+            <a asp-page="/Kampus/KayipEsyaDetay" asp-route-id="@ilan.Id" class="duyuru text-reset text-decoration-none">
+                <div class="duyuru-tarih">
+                    <span class="duyuru-gun">@tarih.Day</span>
+                    <span class="duyuru-ay">@tarih.ToString("MMM", tr)</span>
+                </div>
+                <div class="duyuru-icerik flex-grow-1">
+                    <h3 class="duyuru-baslik">
+                        @ilan.Baslik
+                        @if (ilan.TeslimEdildiMi)
+                        {
+                            <span class="badge rozet-yonetici ms-1">Teslim edildi</span>
+                        }
+                    </h3>
+                    <div class="duyuru-bilgi">
+                        <i class="bi bi-geo-alt"></i> @ilan.BulunanYer
+                        &middot; <i class="bi bi-calendar-event"></i> @tarih.ToString("d MMMM yyyy", tr)
+                        @if (ilan.BildirenKullanici != null)
+                        {
+                            <text>&middot; <i class="bi bi-person"></i> @ilan.BildirenKullanici.Ad @ilan.BildirenKullanici.Soyad</text>
+                        }
+                    </div>
+                </div>
+                <i class="bi bi-chevron-right align-self-center text-secondary"></i>
+            </a>
+        }
+    </div>
+}
