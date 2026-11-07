@@ -49,6 +49,13 @@ namespace KampusPortali.Data
                 .HasConversion<string>()
                 .HasMaxLength(30);
 
+            modelBuilder.Entity<Mekan>()
+                .Property(m => m.Id)
+                .HasIdentityOptions(startValue: 100);
+
+            modelBuilder.Entity<Mekan>()
+                .HasData(MekanTohumVerisi.Mekanlar);
+
             // Derslik veya akademisyen silinirse bağlı dersler sessizce silinmesin.
             modelBuilder.Entity<Ders>()
                 .HasOne(d => d.Derslik)

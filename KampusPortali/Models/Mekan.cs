@@ -22,6 +22,9 @@ namespace KampusPortali.Models
         [Display(Name = "Boylam")]
         public double Boylam { get; set; }
 
+        [Display(Name = "Bina Sınırı (GeoJSON)")]
+        public string? Geometri { get; set; }
+
         [StringLength(500, ErrorMessage = "Açıklama en fazla {1} karakter olabilir.")]
         [Display(Name = "Açıklama")]
         public string? Aciklama { get; set; }

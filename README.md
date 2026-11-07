@@ -53,3 +53,9 @@ Modeller, iOS projesindeki ([BLM4587-Proje](https://github.com/superkerem/BLM458
 - Sayfalar: `/Kayit`, `/Giris` (öğrenci no veya e-posta ile), `/Cikis`, `/ErisimEngellendi`, `/Yonetim` (yalnızca `Yonetici` rolü).
 - 5 hatalı girişte hesap 5 dakika kilitlenir.
 - Formlarda **Data Annotations** ile hem sunucu (`ModelState.IsValid`) hem istemci tarafı (jQuery Unobtrusive Validation) doğrulama yapılır.
+
+## Kampüs haritası verisi
+
+- Harita [Leaflet](https://leafletjs.com/) ile çiziliyor, altlık [OpenStreetMap](https://www.openstreetmap.org/copyright).
+- Bina sınırları OpenStreetMap'ten (ODbL lisansı) Overpass sorgusuyla alındı; ham dosya `KampusPortali/Data/Kaynaklar/kampus_binalari.geojson`.
+- Yerleşke binaları `Data/MekanTohumVerisi.cs` ile `Mekanlar` tablosuna migration üzerinden ekleniyor. Adı bilinmeyen binalar `wwwroot/data/kampus_diger_binalar.geojson` dosyasından gri blok olarak çiziliyor.

@@ -42,7 +42,8 @@ namespace KampusPortali.Pages.Kampus
                 ikon = m.Tur.Ikon(),
                 enlem = m.Enlem,
                 boylam = m.Boylam,
-                aciklama = m.Aciklama
+                aciklama = m.Aciklama,
+                geometri = m.Geometri == null ? (JsonElement?)null : JsonDocument.Parse(m.Geometri).RootElement.Clone()
             }));
         }
     }

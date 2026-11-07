@@ -836,3 +836,27 @@ a {
     max-height: none;
   }
 }
+
+.leaflet-tooltip.bina-etiket {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: normal;
+  width: 110px;
+  line-height: 1.15;
+  text-shadow: 0 0 3px rgba(10, 56, 102, 0.9), 0 0 2px rgba(10, 56, 102, 0.9);
+  pointer-events: none;
+}
+
+.leaflet-tooltip.bina-etiket::before {
+  display: none;
+}
+
+.etiketler-gizli .bina-etiket {
+  display: none;
+}

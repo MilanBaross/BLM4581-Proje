@@ -5,7 +5,7 @@ namespace KampusPortali.Models
 {
     public enum MekanTuru
     {
-        [Display(Name = "Fakülte")]
+        [Display(Name = "Akademik")]
         Fakulte,
 
         [Display(Name = "Kütüphane")]
@@ -19,6 +19,9 @@ namespace KampusPortali.Models
 
         [Display(Name = "Ring Durağı")]
         RingDuragi,
+
+        [Display(Name = "Yurt")]
+        Yurt,
 
         [Display(Name = "Diğer")]
         Diger
@@ -37,6 +40,7 @@ namespace KampusPortali.Models
             MekanTuru.Yemekhane => "bi-cup-hot",
             MekanTuru.Kantin => "bi-shop",
             MekanTuru.RingDuragi => "bi-bus-front",
+            MekanTuru.Yurt => "bi-house-door",
             _ => "bi-geo-alt"
         };
     }
