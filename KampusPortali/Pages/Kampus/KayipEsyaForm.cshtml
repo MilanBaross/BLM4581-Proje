@@ -1,0 +1,80 @@
+@page "{id:int?}"
+@model KampusPortali.Pages.Kampus.KayipEsyaFormModel
+@{
+    var modul = Moduller.KayipEsya;
+    var baslik = Model.DuzenlemeMi ? "İlanı Düzenle" : "İlan Ekle";
+    ViewData["Title"] = baslik;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item"><a asp-page="/Kampus/KayipEsya">@modul.Baslik</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@baslik</li>
+    </ol>
+</nav>
+
+<div class="sayfa-baslik">
+    <h1>@baslik</h1>
+    <p>@(Model.DuzenlemeMi ? "İlan bilgilerini güncelleyin." : "Bulduğunuz eşyanın bilgilerini girin.")</p>
+</div>
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="panel-kart">
+            <form method="post" asp-route-id="@Model.Id">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Girdi.Baslik" class="form-label"></label>
+                    <div class="ikonlu-girdi">
+                        <i class="bi bi-type"></i>
+                        <input asp-for="Girdi.Baslik" class="form-control" placeholder="Örn: Siyah sırt çantası" />
+                    </div>
+                    <span asp-validation-for="Girdi.Baslik" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Girdi.Aciklama" class="form-label"></label>
+                    <textarea asp-for="Girdi.Aciklama" class="form-control" rows="4"
+                              placeholder="Eşyanın rengi, markası, içindekiler..."></textarea>
+                    <span asp-validation-for="Girdi.Aciklama" class="text-danger small"></span>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-12 col-sm-7">
+                        <label asp-for="Girdi.BulunanYer" class="form-label"></label>
+                        <div class="ikonlu-girdi">
+                            <i class="bi bi-geo-alt"></i>
+                            <input asp-for="Girdi.BulunanYer" class="form-control" placeholder="Örn: Merkez Kütüphane" />
+                        </div>
+                        <span asp-validation-for="Girdi.BulunanYer" class="text-danger small"></span>
+                    </div>
+                    <div class="col-12 col-sm-5">
+                        <label asp-for="Girdi.BulunmaTarihi" class="form-label"></label>
+                        <input asp-for="Girdi.BulunmaTarihi" type="date" class="form-control"
+                               max="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="Girdi.BulunmaTarihi" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="form-check form-switch mb-4">
+                    <input asp-for="Girdi.TeslimEdildiMi" class="form-check-input" role="switch" />
+                    <label asp-for="Girdi.TeslimEdildiMi" class="form-check-label">Teslim edildi (eşya sahibine ulaştı)</label>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-lg"></i> @(Model.DuzenlemeMi ? "Kaydet" : "İlanı Ekle")
+                    </button>
+                    <a asp-page="@(Model.DuzenlemeMi ? "/Kampus/KayipEsyaDetay" : "/Kampus/KayipEsya")"
+                       asp-route-id="@Model.Id" class="btn btn-outline-secondary">Vazgeç</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
