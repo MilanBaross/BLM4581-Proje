@@ -57,5 +57,6 @@ Modeller, iOS projesindeki ([BLM4587-Proje](https://github.com/superkerem/BLM458
 ## Kampüs haritası verisi
 
 - Harita [Leaflet](https://leafletjs.com/) ile çiziliyor, altlık [OpenStreetMap](https://www.openstreetmap.org/copyright).
+- Binalar Leaflet şekilleriyle 3B (eğik izdüşüm) olarak çiziliyor: her binanın çatısı yüksekliği kadar kaydırılıyor, duvarlar dörtgen olarak ekleniyor (`wwwroot/js/harita.js`).
 - Bina sınırları OpenStreetMap'ten (ODbL lisansı) Overpass sorgusuyla alındı; ham dosya `KampusPortali/Data/Kaynaklar/kampus_binalari.geojson`.
 - Yerleşke binaları `Data/MekanTohumVerisi.cs` ile `Mekanlar` tablosuna migration üzerinden ekleniyor. Adı bilinmeyen binalar `wwwroot/data/kampus_diger_binalar.geojson` dosyasından gri blok olarak çiziliyor.

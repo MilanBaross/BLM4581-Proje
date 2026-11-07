@@ -24,18 +24,20 @@
     </div>
 </div>
 
-@if (Model.Turler.Count > 1)
-{
-    <div class="harita-filtre" role="group" aria-label="Mekan türüne göre filtrele">
-        <button type="button" class="filtre-dugme aktif" data-tur="">Tümü</button>
-        @foreach (var tur in Model.Turler)
-        {
-            <button type="button" class="filtre-dugme" data-tur="@tur">
-                <i class="bi @tur.Ikon()"></i> @tur.GorunenAd()
-            </button>
-        }
-    </div>
-}
+<div class="harita-arac-cubugu">
+    @if (Model.Turler.Count > 1)
+    {
+        <div class="harita-filtre" role="group" aria-label="Mekan türüne göre filtrele">
+            <button type="button" class="filtre-dugme aktif" data-tur="">Tümü</button>
+            @foreach (var tur in Model.Turler)
+            {
+                <button type="button" class="filtre-dugme" data-tur="@tur">
+                    <i class="bi @tur.Ikon()"></i> @tur.GorunenAd()
+                </button>
+            }
+        </div>
+    }
+</div>
 
 <div class="row g-3">
     <div class="col-12 col-lg-8">
