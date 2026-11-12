@@ -962,8 +962,6 @@ a {
   }
 }
 
-
-
 .derslik-sekmeler {
   display: flex;
   gap: 1.5rem;
@@ -1427,4 +1425,334 @@ a.cizelge-ders:hover {
 
 .ders-grubu .ders-secenek:hover {
   background: #eef1f4;
+}
+
+.modul-ust-dugme {
+  flex-shrink: 0;
+  font-weight: 500;
+  color: var(--vurgu);
+}
+
+.doluluk-kart {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 2fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.doluluk-ozet {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.doluluk-etiket {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yazi-soluk);
+}
+
+.doluluk-aralik {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--yazi);
+}
+
+.doluluk-yuzde {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--vurgu);
+}
+
+.doluluk-cubuk {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--vurgu-acik);
+}
+
+.doluluk-cubuk.ince {
+  height: 8px;
+}
+
+.doluluk-cubuk > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--vurgu);
+  transition: width 0.3s ease;
+}
+
+.doluluk-alt {
+  font-size: 0.9rem;
+}
+
+.doluluk-durum {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--yazi-soluk);
+}
+
+.doluluk-durum .bi {
+  font-size: 0.5rem;
+}
+
+.doluluk-durum.acik .bi {
+  color: var(--vurgu);
+}
+
+.doluluk-katlar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.kat-doluluk {
+  display: grid;
+  grid-template-columns: 90px 1fr 60px;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.kat-doluluk-ad {
+  font-weight: 600;
+}
+
+.kat-doluluk-sayi {
+  text-align: right;
+  color: var(--yazi-soluk);
+}
+
+.rezervasyon-araligi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.rezervasyon-araligi .form-select {
+  min-width: 140px;
+  border-color: var(--kenar);
+}
+
+.rezervasyon-araligi #Tarih {
+  min-width: 220px;
+}
+
+.rezervasyon-bitis-saat {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  font-weight: 600;
+}
+
+.rezervasyon-kural {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--yazi-soluk);
+}
+
+.masa-lejant {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--yazi-soluk);
+}
+
+.masa-lejant > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.masa-lejant-ozet {
+  font-weight: 600;
+  color: var(--yazi);
+}
+
+.lejant-kutu {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--kenar);
+  background: var(--yuzey);
+}
+
+.lejant-kutu.dolu {
+  background: #e4e7eb;
+  border-color: #e4e7eb;
+}
+
+.lejant-kutu.secili {
+  background: var(--vurgu);
+  border-color: var(--vurgu);
+}
+
+.masa-kati {
+  margin-bottom: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.masa-kati-baslik {
+  margin-bottom: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.masa-izgara {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 0.6rem;
+}
+
+.masa-secim {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.masa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-height: 64px;
+  padding: 0.5rem;
+  border: 1px solid var(--kenar);
+  border-radius: 6px;
+  background: var(--yuzey);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.masa:hover {
+  border-color: var(--vurgu);
+}
+
+.masa-no {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.masa-ikonlar {
+  display: inline-flex;
+  gap: 0.4rem;
+  min-height: 1rem;
+  font-size: 0.75rem;
+  color: var(--yazi-soluk);
+}
+
+.masa-ikonlar > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.masa.dolu {
+  background: #e4e7eb;
+  border-color: #e4e7eb;
+  color: #9aa1aa;
+  cursor: not-allowed;
+}
+
+.masa.dolu .masa-ikonlar {
+  color: #9aa1aa;
+}
+
+.masa-secim:checked + .masa {
+  background: var(--vurgu);
+  border-color: var(--vurgu);
+  color: #fff;
+}
+
+.masa-secim:checked + .masa .masa-ikonlar {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.masa-secim:focus-visible + .masa {
+  outline: 2px solid var(--vurgu);
+  outline-offset: 2px;
+}
+
+.rezervasyon-cubugu {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.5rem;
+  border: 1px solid var(--kenar);
+  border-radius: var(--kose);
+  background: var(--yuzey);
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.06);
+}
+
+.rezervasyon-cubugu-bilgi {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.rezervasyon-cubugu-masa {
+  font-weight: 600;
+}
+
+.rezervasyon-cubugu-zaman {
+  font-size: 0.82rem;
+  color: var(--yazi-soluk);
+}
+
+.rezervasyon-satiri .btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 767.98px) {
+  .doluluk-kart {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .rezervasyon-araligi > div,
+  .rezervasyon-araligi .form-select,
+  .rezervasyon-araligi #Tarih,
+  .rezervasyon-araligi .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .modul-ust {
+    flex-wrap: wrap;
+  }
+
+  .modul-ust-dugme {
+    width: 100%;
+  }
+
+  .rezervasyon-satiri {
+    flex-wrap: wrap;
+  }
+
+  .rezervasyon-satiri .btn {
+    margin-left: calc(52px + 1.25rem);
+  }
+
+  .masa-izgara {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
 }
