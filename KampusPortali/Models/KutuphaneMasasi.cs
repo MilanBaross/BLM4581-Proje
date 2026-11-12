@@ -22,13 +22,6 @@ namespace KampusPortali.Models
         [Display(Name = "Priz Var mı?")]
         public bool PrizVarMi { get; set; }
 
-        [Display(Name = "Dolu mu?")]
-        public bool DoluMu { get; set; } = false;
-
-        public int? RezerveEdenKullaniciId { get; set; }
-        public Kullanici? RezerveEdenKullanici { get; set; }
-
-        [Display(Name = "Rezervasyon Bitişi")]
-        public DateTime? RezervasyonBitis { get; set; }
+        public ICollection<MasaRezervasyonu> Rezervasyonlar { get; set; } = new List<MasaRezervasyonu>();
     }
 }

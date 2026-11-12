@@ -15,6 +15,7 @@ namespace KampusPortali.Data
         public DbSet<Derslik> Derslikler { get; set; }
         public DbSet<Ders> Dersler { get; set; }
         public DbSet<KutuphaneMasasi> KutuphaneMasalari { get; set; }
+        public DbSet<MasaRezervasyonu> MasaRezervasyonlari { get; set; }
         public DbSet<Etkinlik> Etkinlikler { get; set; }
         public DbSet<KayipEsya> KayipEsyalar { get; set; }
         public DbSet<Duyuru> Duyurular { get; set; }
@@ -118,12 +119,27 @@ namespace KampusPortali.Data
                 .HasForeignKey(d => d.AkademisyenId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Kullanıcı silinince masa rezervasyonu boşa çıkar.
             modelBuilder.Entity<KutuphaneMasasi>()
-                .HasOne(m => m.RezerveEdenKullanici)
-                .WithMany(k => k.RezerveMasalar)
-                .HasForeignKey(m => m.RezerveEdenKullaniciId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .Property(m => m.Id)
+                .HasIdentityOptions(startValue: 100);
+
+            modelBuilder.Entity<KutuphaneMasasi>()
+                .HasData(KutuphaneTohumVerisi.Masalar);
+
+            modelBuilder.Entity<MasaRezervasyonu>()
+                .HasOne(r => r.Masa)
+                .WithMany(m => m.Rezervasyonlar)
+                .HasForeignKey(r => r.MasaId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<MasaRezervasyonu>()
+                .HasOne(r => r.Kullanici)
+                .WithMany(k => k.Rezervasyonlar)
+                .HasForeignKey(r => r.KullaniciId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<MasaRezervasyonu>()
+                .HasIndex(r => new { r.MasaId, r.Baslangic, r.Bitis });
 
             modelBuilder.Entity<KayipEsya>()
                 .HasOne(e => e.BildirenKullanici)
