@@ -1,0 +1,21 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace KampusPortali.ViewModels
+{
+    public class DuyuruViewModel
+    {
+        [Required(ErrorMessage = "Başlık zorunludur.")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "Başlık {2}-{1} karakter arasında olmalıdır.")]
+        [Display(Name = "Başlık")]
+        public string Baslik { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "İçerik zorunludur.")]
+        [StringLength(2000, ErrorMessage = "İçerik en fazla {1} karakter olabilir.")]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "İçerik")]
+        public string Icerik { get; set; } = string.Empty;
+
+        [Display(Name = "Önemli mi?")]
+        public bool OnemliMi { get; set; }
+    }
+}
