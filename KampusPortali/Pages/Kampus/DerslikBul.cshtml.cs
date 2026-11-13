@@ -1,5 +1,6 @@
 using KampusPortali.Data;
 using KampusPortali.Models;
+using KampusPortali.Yardimcilar;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -37,7 +38,7 @@ namespace KampusPortali.Pages.Kampus
 
         public Ders? SiradakiDers { get; set; }
 
-        public DateTime Simdi { get; } = SimdiTurkiye();
+        public DateTime Simdi { get; } = TurkiyeSaati.Simdi();
 
         public DayOfWeek Bugun => Simdi.DayOfWeek;
 
@@ -215,19 +216,6 @@ namespace KampusPortali.Pages.Kampus
         public static int GunSirasi(DayOfWeek gun) => ((int)gun + 6) % 7;
 
         private int KullaniciId() => int.Parse(_userManager.GetUserId(User)!);
-
-        private static DateTime SimdiTurkiye()
-        {
-            try
-            {
-                var bolge = TimeZoneInfo.FindSystemTimeZoneById("Europe/Istanbul");
-                return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, bolge);
-            }
-            catch (TimeZoneNotFoundException)
-            {
-                return DateTime.Now;
-            }
-        }
 
         public record DersKatalogu(string Kod, string DersAdi, string Grup);
 

@@ -22,7 +22,7 @@ namespace KampusPortali.Models
 
         public DateTime KayitTarihi { get; set; } = DateTime.UtcNow;
 
-        public ICollection<KutuphaneMasasi> RezerveMasalar { get; set; } = new List<KutuphaneMasasi>();
+        public ICollection<MasaRezervasyonu> Rezervasyonlar { get; set; } = new List<MasaRezervasyonu>();
         public ICollection<KayipEsya> BildirilenEsyalar { get; set; } = new List<KayipEsya>();
         public ICollection<Duyuru> Duyurular { get; set; } = new List<Duyuru>();
     }

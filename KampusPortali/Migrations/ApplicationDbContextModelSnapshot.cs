@@ -1238,9 +1238,7 @@ namespace KampusPortali.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("DoluMu")
-                        .HasColumnType("boolean");
+                    NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 100L, null, null, null, null, null);
 
                     b.Property<int>("Kapasite")
                         .HasColumnType("integer");
@@ -1256,20 +1254,337 @@ namespace KampusPortali.Migrations
                     b.Property<bool>("PrizVarMi")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime?>("RezervasyonBitis")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("RezerveEdenKullaniciId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MasaNo")
                         .IsUnique();
 
-                    b.HasIndex("RezerveEdenKullaniciId");
-
                     b.ToTable("KutuphaneMasalari");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-01",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-02",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-03",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-04",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-05",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-06",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-07",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-08",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-09",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-10",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-11",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Kapasite = 1,
+                            Kat = 0,
+                            MasaNo = "Z-12",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Kapasite = 4,
+                            Kat = 0,
+                            MasaNo = "Z-13",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Kapasite = 4,
+                            Kat = 0,
+                            MasaNo = "Z-14",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Kapasite = 4,
+                            Kat = 0,
+                            MasaNo = "Z-15",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Kapasite = 4,
+                            Kat = 0,
+                            MasaNo = "Z-16",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-01",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-02",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-03",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-04",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-05",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-06",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-07",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-08",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-09",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-10",
+                            PrizVarMi = true
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-11",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-12",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-13",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-14",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-15",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-16",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-17",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-18",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-19",
+                            PrizVarMi = false
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Kapasite = 1,
+                            Kat = 1,
+                            MasaNo = "1-20",
+                            PrizVarMi = false
+                        });
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.MasaRezervasyonu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Baslangic")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Bitis")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IptalEdildiMi")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("KullaniciId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MasaId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("OlusturmaTarihi")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KullaniciId");
+
+                    b.HasIndex("MasaId", "Baslangic", "Bitis");
+
+                    b.ToTable("MasaRezervasyonlari");
                 });
 
             modelBuilder.Entity("KampusPortali.Models.Mekan", b =>
@@ -1770,14 +2085,23 @@ namespace KampusPortali.Migrations
                     b.Navigation("Kullanici");
                 });
 
-            modelBuilder.Entity("KampusPortali.Models.KutuphaneMasasi", b =>
+            modelBuilder.Entity("KampusPortali.Models.MasaRezervasyonu", b =>
                 {
-                    b.HasOne("KampusPortali.Models.Kullanici", "RezerveEdenKullanici")
-                        .WithMany("RezerveMasalar")
-                        .HasForeignKey("RezerveEdenKullaniciId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                    b.HasOne("KampusPortali.Models.Kullanici", "Kullanici")
+                        .WithMany("Rezervasyonlar")
+                        .HasForeignKey("KullaniciId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("RezerveEdenKullanici");
+                    b.HasOne("KampusPortali.Models.KutuphaneMasasi", "Masa")
+                        .WithMany("Rezervasyonlar")
+                        .HasForeignKey("MasaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kullanici");
+
+                    b.Navigation("Masa");
                 });
 
             modelBuilder.Entity("KampusPortali.Models.Sinav", b =>
@@ -1859,7 +2183,12 @@ namespace KampusPortali.Migrations
 
                     b.Navigation("Duyurular");
 
-                    b.Navigation("RezerveMasalar");
+                    b.Navigation("Rezervasyonlar");
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.KutuphaneMasasi", b =>
+                {
+                    b.Navigation("Rezervasyonlar");
                 });
 
             modelBuilder.Entity("KampusPortali.Models.Mekan", b =>

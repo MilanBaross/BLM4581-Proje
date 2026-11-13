@@ -1,0 +1,139 @@
+@page
+@model KampusPortali.Pages.Kampus.RezervasyonlarimModel
+@using System.Globalization
+@using KampusPortali.Yardimcilar
+@{
+    ViewData["Title"] = "Rezervasyonlarım";
+    var tr = new CultureInfo("tr-TR");
+    (string Metin, string Sinif) Durum(MasaRezervasyonu r)
+    {
+        if (r.IptalEdildiMi) return ("İptal edildi", "rozet-kullanici");
+        if (r.Bitis <= Model.SimdiUtc) return ("Tamamlandı", "rozet-kullanici");
+        if (r.Baslangic <= Model.SimdiUtc) return ("Şu an aktif", "rozet-onemli");
+        return ("Yaklaşan", "rozet-yonetici");
+    }
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item"><a asp-page="/Kampus/Kutuphane">Kütüphane</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Rezervasyonlarım</li>
+    </ol>
+</nav>
+
+<div class="modul-ust">
+    <span class="modul-ust-ikon"><i class="bi bi-calendar-check"></i></span>
+    <div class="flex-grow-1">
+        <h1>Rezervasyonlarım</h1>
+        <p class="mb-0">Kütüphane masa rezervasyonlarınızı görün, iptal edin ya da masayı erken boşaltın.</p>
+    </div>
+    <a asp-page="/Kampus/Kutuphane" class="btn btn-light btn-sm modul-ust-dugme">
+        <i class="bi bi-plus-lg"></i> Yeni rezervasyon
+    </a>
+</div>
+
+@foreach (var (baslik, liste, bosMetin) in new[]
+{
+    ("Yaklaşan ve Aktif", Model.Yaklasanlar, "Yaklaşan rezervasyonunuz yok."),
+    ("Geçmiş", Model.Gecmisler, "Geçmiş rezervasyonunuz yok.")
+})
+{
+    <section class="bolum">
+        <h2 class="bolum-baslik">@baslik</h2>
+
+        @if (liste.Count == 0)
+        {
+            <div class="panel-kart bos-durum">
+                <i class="bi bi-calendar"></i>
+                <h3>@bosMetin</h3>
+                @if (liste == Model.Yaklasanlar)
+                {
+                    <a asp-page="/Kampus/Kutuphane" class="btn btn-primary btn-sm mt-2">Masa ayır</a>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="panel-kart p-0">
+                @foreach (var r in liste)
+                {
+                    var baslangic = TurkiyeSaati.YereleCevir(r.Baslangic);
+                    var bitis = TurkiyeSaati.YereleCevir(r.Bitis);
+                    var durum = Durum(r);
+                    <div class="duyuru rezervasyon-satiri">
+                        <div class="duyuru-tarih">
+                            <span class="duyuru-gun">@baslangic.Day</span>
+                            <span class="duyuru-ay">@baslangic.ToString("MMM", tr)</span>
+                        </div>
+                        <div class="duyuru-icerik flex-grow-1">
+                            <h3 class="duyuru-baslik">
+                                Masa @(r.Masa?.MasaNo)
+                                <span class="badge @durum.Sinif ms-1">@durum.Metin</span>
+                            </h3>
+                            <div class="duyuru-bilgi">
+                                <i class="bi bi-calendar-event"></i> @baslangic.ToString("d MMMM yyyy, dddd", tr)
+                                &middot; <i class="bi bi-clock"></i> @baslangic.ToString("HH:mm")-@bitis.ToString("HH:mm")
+                                @if (r.Masa != null)
+                                {
+                                    <text>&middot; <i class="bi bi-layers"></i> @KutuphaneKurallari.KatAdi(r.Masa.Kat)</text>
+                                }
+                            </div>
+                        </div>
+                        @if (durum.Metin == "Yaklaşan")
+                        {
+                            <button type="button" class="btn btn-outline-danger btn-sm align-self-center" data-bs-toggle="modal" data-bs-target="#islemOnayi"
+                                    data-islem="Iptal" data-id="@r.Id" data-baslik="Rezervasyonu iptal et"
+                                    data-metin="Masa @(r.Masa?.MasaNo) için @baslangic.ToString("d MMMM HH:mm", tr) rezervasyonu iptal edilecek. Emin misiniz?"
+                                    data-dugme="İptal et">
+                                İptal et
+                            </button>
+                        }
+                        else if (durum.Metin == "Şu an aktif")
+                        {
+                            <button type="button" class="btn btn-outline-secondary btn-sm align-self-center" data-bs-toggle="modal" data-bs-target="#islemOnayi"
+                                    data-islem="Bitir" data-id="@r.Id" data-baslik="Masayı boşalt"
+                                    data-metin="Masa @(r.Masa?.MasaNo) şimdi boşaltılacak ve başkaları tarafından ayrılabilecek. Emin misiniz?"
+                                    data-dugme="Boşalt">
+                                Masayı boşalt
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </section>
+}
+
+<div class="modal fade" id="islemOnayi" tabindex="-1" aria-labelledby="islemOnayiBaslik" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="islemOnayiBaslik"></h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body" id="islemOnayiMetin"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <form method="post" id="islemFormu" data-adres="@Url.Page("/Kampus/Rezervasyonlarim")">
+                    <input type="hidden" name="id" id="islemId" />
+                    <button type="submit" class="btn btn-danger" id="islemDugmesi"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("islemOnayi").addEventListener("show.bs.modal", function (olay) {
+            var dugme = olay.relatedTarget;
+            var form = document.getElementById("islemFormu");
+            form.action = form.dataset.adres + "?handler=" + dugme.dataset.islem;
+            document.getElementById("islemId").value = dugme.dataset.id;
+            document.getElementById("islemOnayiBaslik").textContent = dugme.dataset.baslik;
+            document.getElementById("islemOnayiMetin").textContent = dugme.dataset.metin;
+            document.getElementById("islemDugmesi").textContent = dugme.dataset.dugme;
+        });
+    </script>
+}

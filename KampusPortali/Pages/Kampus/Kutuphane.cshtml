@@ -1,7 +1,232 @@
 @page
+@model KampusPortali.Pages.Kampus.KutuphaneModel
+@using System.Globalization
+@using KampusPortali.Yardimcilar
 @{
     var modul = Moduller.Kutuphane;
     ViewData["Title"] = modul.Baslik;
+    var tr = new CultureInfo("tr-TR");
+    string Saat(TimeOnly saat) => saat.ToString("HH:mm");
+    string GunEtiketi(DateOnly gun)
+    {
+        var ad = gun.ToString("d MMMM dddd", tr);
+        if (gun == Model.Bugun) return $"Bugün · {ad}";
+        if (gun == Model.Bugun.AddDays(1)) return $"Yarın · {ad}";
+        return ad;
+    }
+    var bosMasaSayisi = Model.Masalar.Count(m => !Model.DoluMasalar.Contains(m.Id));
 }
 
-<partial name="_ModulIskeleti" model="modul" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@modul.Baslik</li>
+    </ol>
+</nav>
+
+<div class="modul-ust">
+    <span class="modul-ust-ikon"><i class="bi @modul.Ikon"></i></span>
+    <div class="flex-grow-1">
+        <h1>@modul.Baslik</h1>
+        <p class="mb-0">Anlık doluluğu görün, tarih ve saat seçip çalışma masası ayırın.</p>
+    </div>
+    <a asp-page="/Kampus/Rezervasyonlarim" class="btn btn-light btn-sm modul-ust-dugme">
+        <i class="bi bi-calendar-check"></i> Rezervasyonlarım
+    </a>
+</div>
+
+<section class="bolum">
+    <div class="panel-kart doluluk-kart">
+        <div class="doluluk-ozet">
+            @if (Model.AralikHatasi == null && Model.Tarih is DateOnly secilenGun && Model.Baslangic is TimeOnly secilenBaslangic && Model.Bitis is TimeOnly secilenBitis)
+            {
+                <span class="doluluk-etiket">Seçilen saatte doluluk</span>
+                <span class="doluluk-aralik">@GunEtiketi(secilenGun) · @Saat(secilenBaslangic)-@Saat(secilenBitis)</span>
+            }
+            else
+            {
+                <span class="doluluk-etiket">Anlık doluluk</span>
+            }
+            <span class="doluluk-yuzde">%@Model.DolulukYuzdesi</span>
+            <div class="doluluk-cubuk" role="progressbar" aria-valuenow="@Model.DolulukYuzdesi" aria-valuemin="0" aria-valuemax="100"
+                 aria-label="Kütüphane doluluk oranı">
+                <span style="width: @Model.DolulukYuzdesi%"></span>
+            </div>
+            <span class="doluluk-alt">@Model.AraliktaDoluMasa / @Model.ToplamMasa masa dolu</span>
+            <span class="doluluk-durum @(Model.KutuphaneAcik ? "acik" : "")">
+                <i class="bi bi-circle-fill"></i>
+                @(Model.KutuphaneAcik
+                    ? $"Şu an açık · {Model.SimdiDoluMasa} masa dolu · Kapanış {Saat(KutuphaneKurallari.Kapanis)}"
+                    : $"Şu an kapalı · Açılış {Saat(KutuphaneKurallari.Acilis)}")
+            </span>
+        </div>
+
+        <div class="doluluk-katlar">
+            @foreach (var kat in Model.Katlar)
+            {
+                <div class="kat-doluluk">
+                    <span class="kat-doluluk-ad">@KutuphaneKurallari.KatAdi(kat.Kat)</span>
+                    <div class="doluluk-cubuk ince"><span style="width: @kat.Yuzde%"></span></div>
+                    <span class="kat-doluluk-sayi">@kat.Dolu / @kat.Toplam</span>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="bolum">
+    <h2 class="bolum-baslik">Masa Ayır</h2>
+
+    <form method="get" class="panel-kart rezervasyon-araligi mb-3" id="aralikFormu">
+        <div>
+            <label class="form-label" for="Tarih">Gün</label>
+            <select class="form-select" id="Tarih" name="Tarih">
+                @foreach (var gun in Model.Gunler)
+                {
+                    <option value="@gun.ToString("yyyy-MM-dd")" selected="@(gun == Model.Tarih)">@GunEtiketi(gun)</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label class="form-label" for="Baslangic">Başlangıç</label>
+            <select class="form-select" id="Baslangic" name="Baslangic">
+                @foreach (var saat in Model.BaslangicSecenekleri)
+                {
+                    <option value="@Saat(saat)" selected="@(saat == Model.Baslangic)">@Saat(saat)</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label class="form-label" for="Sure">Süre</label>
+            <select class="form-select" id="Sure" name="Sure">
+                @foreach (var dakika in Model.SureSecenekleri)
+                {
+                    var kapanistanOnce = Model.Baslangic is TimeOnly secim &&
+                        secim.ToTimeSpan() + TimeSpan.FromMinutes(dakika) <= KutuphaneKurallari.Kapanis.ToTimeSpan();
+                    if (kapanistanOnce || dakika == Model.Sure)
+                    {
+                        <option value="@dakika" selected="@(dakika == Model.Sure)">@KampusPortali.Pages.Kampus.KutuphaneModel.SureMetni(TimeSpan.FromMinutes(dakika))</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="rezervasyon-bitis">
+            <span class="form-label d-block">Bitiş</span>
+            <span class="rezervasyon-bitis-saat">@(Model.Bitis is TimeOnly bitisSaati ? Saat(bitisSaati) : "-")</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Uygun masaları göster</button>
+        <p class="rezervasyon-kural">
+            Kütüphane @Saat(KutuphaneKurallari.Acilis)-@Saat(KutuphaneKurallari.Kapanis) arası açık. Bir rezervasyon en fazla
+            @KampusPortali.Pages.Kampus.KutuphaneModel.SureMetni(KutuphaneKurallari.TekSeferdeEnFazlaSure) sürebilir; bir kişi bir günde toplam en fazla
+            @KampusPortali.Pages.Kampus.KutuphaneModel.SureMetni(KutuphaneKurallari.GunlukEnFazlaSure) rezervasyon yapabilir ve aynı anda yalnızca bir masa ayırabilir.
+            @if (Model.AralikHatasi == null)
+            {
+                <strong>Bu gün için kalan hakkın: @KampusPortali.Pages.Kampus.KutuphaneModel.SureMetni(Model.GunlukKalan).</strong>
+            }
+        </p>
+    </form>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger" role="alert">
+            @foreach (var hata in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@hata.ErrorMessage</div>
+            }
+        </div>
+    }
+
+    @if (Model.AralikHatasi != null)
+    {
+        <div class="panel-kart bos-durum">
+            <i class="bi bi-clock-history"></i>
+            <h3>Bu saat aralığı seçilemez</h3>
+            <p class="mb-0">@Model.AralikHatasi</p>
+        </div>
+    }
+    else
+    {
+        @if (Model.CakisanRezervasyonum != null)
+        {
+            <div class="alert alert-info" role="alert">
+                Bu saat aralığında zaten
+                <strong>@(Model.CakisanRezervasyonum.Masa?.MasaNo)</strong> numaralı masada rezervasyonun var.
+                <a asp-page="/Kampus/Rezervasyonlarim">Rezervasyonlarım</a>
+            </div>
+        }
+
+        <form method="post" asp-page-handler="RezerveEt" class="masa-secim-formu">
+            <input type="hidden" name="Tarih" value="@(Model.Tarih?.ToString("yyyy-MM-dd"))" />
+            <input type="hidden" name="Baslangic" value="@(Model.Baslangic is TimeOnly b ? Saat(b) : "")" />
+            <input type="hidden" name="Sure" value="@Model.Sure" />
+
+            <div class="masa-lejant">
+                <span><span class="lejant-kutu bos"></span> Boş</span>
+                <span><span class="lejant-kutu dolu"></span> Dolu</span>
+                <span><span class="lejant-kutu secili"></span> Seçili</span>
+                <span><i class="bi bi-plug"></i> Priz var</span>
+                <span><i class="bi bi-people"></i> Grup masası</span>
+                <span class="ms-auto masa-lejant-ozet">Seçilen aralıkta @bosMasaSayisi masa boş</span>
+            </div>
+
+            @foreach (var kat in Model.Masalar.GroupBy(m => m.Kat))
+            {
+                <div class="panel-kart masa-kati">
+                    <h3 class="masa-kati-baslik">@KutuphaneKurallari.KatAdi(kat.Key)</h3>
+                    <div class="masa-izgara">
+                        @foreach (var masa in kat)
+                        {
+                            var dolu = Model.DoluMasalar.Contains(masa.Id);
+                            <input type="radio" class="masa-secim" name="masaId" id="masa-@masa.Id" value="@masa.Id" disabled="@dolu" />
+                            <label for="masa-@masa.Id" class="masa @(dolu ? "dolu" : "")" data-masa-no="@masa.MasaNo"
+                                   title="@masa.MasaNo · @(dolu ? "Dolu" : "Boş")@(masa.PrizVarMi ? " · Priz var" : "")@(masa.Kapasite > 1 ? $" · {masa.Kapasite} kişilik" : "")">
+                                <span class="masa-no">@masa.MasaNo</span>
+                                <span class="masa-ikonlar">
+                                    @if (masa.PrizVarMi)
+                                    {
+                                        <i class="bi bi-plug" aria-label="Priz var"></i>
+                                    }
+                                    @if (masa.Kapasite > 1)
+                                    {
+                                        <span><i class="bi bi-people" aria-hidden="true"></i>@masa.Kapasite</span>
+                                    }
+                                </span>
+                            </label>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="rezervasyon-cubugu">
+                <div class="rezervasyon-cubugu-bilgi">
+                    <span class="rezervasyon-cubugu-masa" id="seciliMasa">Masa seçilmedi</span>
+                    <span class="rezervasyon-cubugu-zaman">
+                        @if (Model.Tarih is DateOnly t && Model.Baslangic is TimeOnly bs && Model.Bitis is TimeOnly bt)
+                        {
+                            <text>@GunEtiketi(t) · @Saat(bs)-@Saat(bt)</text>
+                        }
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-primary" id="rezervasyonDugmesi" disabled>Rezervasyon Yap</button>
+            </div>
+        </form>
+    }
+</section>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll("#aralikFormu select").forEach(function (secim) {
+            secim.addEventListener("change", function () {
+                document.getElementById("aralikFormu").submit();
+            });
+        });
+
+        document.querySelectorAll(".masa-secim").forEach(function (secenek) {
+            secenek.addEventListener("change", function () {
+                var etiket = document.querySelector("label[for='" + secenek.id + "']");
+                document.getElementById("seciliMasa").textContent = "Masa " + etiket.dataset.masaNo;
+                document.getElementById("rezervasyonDugmesi").disabled = false;
+            });
+        });
+    </script>
+}
