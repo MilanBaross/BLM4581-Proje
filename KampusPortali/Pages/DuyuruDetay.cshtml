@@ -1,0 +1,88 @@
+@page "{id:int}"
+@model KampusPortali.Pages.DuyuruDetayModel
+@using System.Globalization
+@{
+    var duyuru = Model.Duyuru;
+    ViewData["Title"] = duyuru.Baslik;
+    var tr = new CultureInfo("tr-TR");
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        @if (Model.YoneticiMi)
+        {
+            <li class="breadcrumb-item"><a asp-page="/Yonetim/Duyurular">Duyurular</a></li>
+        }
+        <li class="breadcrumb-item active" aria-current="page">Duyuru Detayı</li>
+    </ol>
+</nav>
+
+<div class="sayfa-baslik d-flex flex-wrap align-items-start justify-content-between gap-3">
+    <div>
+        <h1>
+            @if (duyuru.OnemliMi)
+            {
+                <span class="badge rozet-onemli fs-6 align-middle">Önemli</span>
+            }
+            @duyuru.Baslik
+        </h1>
+        <p>Duyuru</p>
+    </div>
+
+    @if (Model.YoneticiMi)
+    {
+        <div class="d-flex gap-2">
+            <a asp-page="/Yonetim/DuyuruForm" asp-route-id="@duyuru.Id" class="btn btn-outline-secondary">
+                <i class="bi bi-pencil"></i> Düzenle
+            </a>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#silOnayi">
+                <i class="bi bi-trash"></i> Sil
+            </button>
+        </div>
+    }
+</div>
+
+<div class="panel-kart">
+    <p style="white-space: pre-line">@duyuru.Icerik</p>
+
+    <hr />
+
+    <dl class="row mb-0">
+        <dt class="col-sm-3 form-label"><i class="bi bi-person"></i> Yazar</dt>
+        <dd class="col-sm-9">@(duyuru.Yazar != null ? $"{duyuru.Yazar.Ad} {duyuru.Yazar.Soyad}" : "Yönetim")</dd>
+
+        <dt class="col-sm-3 form-label"><i class="bi bi-calendar-event"></i> Yayın Tarihi</dt>
+        <dd class="col-sm-9 mb-0">@duyuru.YayinTarihi.ToLocalTime().ToString("d MMMM yyyy, dddd HH:mm", tr)</dd>
+    </dl>
+</div>
+
+<a asp-page="@(Model.YoneticiMi ? "/Yonetim/Duyurular" : "/Index")" class="btn btn-link px-0 mt-3 text-decoration-none">
+    <i class="bi bi-arrow-left"></i> @(Model.YoneticiMi ? "Duyurulara dön" : "Ana sayfaya dön")
+</a>
+
+@if (Model.YoneticiMi)
+{
+    <div class="modal fade" id="silOnayi" tabindex="-1" aria-labelledby="silOnayiBaslik" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="silOnayiBaslik">Duyuruyu sil</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    "@duyuru.Baslik" duyurusu kalıcı olarak silinecek. Emin misiniz?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                    <form method="post" asp-page="/Yonetim/Duyurular" asp-page-handler="Sil">
+                        <input type="hidden" name="id" value="@duyuru.Id" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Sil
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
