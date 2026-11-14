@@ -1,0 +1,106 @@
+@page
+@model KampusPortali.Pages.Yonetim.DuyurularModel
+@using System.Globalization
+@{
+    ViewData["Title"] = "Duyuru Yönetimi";
+    var tr = new CultureInfo("tr-TR");
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Yonetim/Index">Yönetim Paneli</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Duyurular</li>
+    </ol>
+</nav>
+
+<div class="sayfa-baslik d-flex flex-wrap align-items-start justify-content-between gap-3">
+    <div>
+        <h1>Duyuru Yönetimi</h1>
+        <p>Ana sayfada görünen duyuruları ekleyin, düzenleyin veya silin.</p>
+    </div>
+    <a asp-page="/Yonetim/DuyuruForm" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Duyuru Ekle
+    </a>
+</div>
+
+@if (Model.Duyurular.Count == 0)
+{
+    <div class="panel-kart bos-durum">
+        <i class="bi bi-megaphone"></i>
+        <h2>Henüz duyuru yok</h2>
+        <p class="mb-0">İlk duyuruyu "Duyuru Ekle" butonuyla paylaşabilirsiniz.</p>
+    </div>
+}
+else
+{
+    <div class="panel-kart p-0">
+        @foreach (var duyuru in Model.Duyurular)
+        {
+            var tarih = duyuru.YayinTarihi.ToLocalTime();
+            <article class="duyuru flex-wrap flex-sm-nowrap position-relative">
+                <div class="duyuru-tarih">
+                    <span class="duyuru-gun">@tarih.Day</span>
+                    <span class="duyuru-ay">@tarih.ToString("MMM", tr)</span>
+                </div>
+                <div class="duyuru-icerik flex-grow-1">
+                    <h3 class="duyuru-baslik">
+                        @if (duyuru.OnemliMi)
+                        {
+                            <span class="badge rozet-onemli">Önemli</span>
+                        }
+                        <a asp-page="/DuyuruDetay" asp-route-id="@duyuru.Id" class="text-reset text-decoration-none stretched-link">@duyuru.Baslik</a>
+                    </h3>
+                    <p class="duyuru-metin">@duyuru.Icerik</p>
+                    <div class="duyuru-bilgi">
+                        <i class="bi bi-person"></i> @(duyuru.Yazar != null ? $"{duyuru.Yazar.Ad} {duyuru.Yazar.Soyad}" : "Yönetim")
+                        &middot; <i class="bi bi-calendar-event"></i> @tarih.ToString("d MMMM yyyy, HH:mm", tr)
+                    </div>
+                </div>
+                <div class="d-flex gap-2 align-self-center ms-sm-auto position-relative" style="z-index: 2">
+                    <a asp-page="/Yonetim/DuyuruForm" asp-route-id="@duyuru.Id" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-pencil"></i> Düzenle
+                    </a>
+                    <button type="button" class="btn btn-sm btn-outline-danger"
+                            data-bs-toggle="modal" data-bs-target="#silOnayi"
+                            data-id="@duyuru.Id" data-baslik="@duyuru.Baslik">
+                        <i class="bi bi-trash"></i> Sil
+                    </button>
+                </div>
+            </article>
+        }
+    </div>
+
+    <div class="modal fade" id="silOnayi" tabindex="-1" aria-labelledby="silOnayiBaslik" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="silOnayiBaslik">Duyuruyu sil</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    "<span id="silinecekBaslik"></span>" duyurusu kalıcı olarak silinecek. Emin misiniz?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                    <form method="post" asp-page-handler="Sil">
+                        <input type="hidden" name="id" id="silinecekId" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Sil
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        // Tek onay penceresi: hangi Sil düğmesine basıldıysa onun bilgileri doldurulur.
+        document.getElementById('silOnayi')?.addEventListener('show.bs.modal', function (e) {
+            const dugme = e.relatedTarget;
+            document.getElementById('silinecekId').value = dugme.dataset.id;
+            document.getElementById('silinecekBaslik').textContent = dugme.dataset.baslik;
+        });
+    </script>
+}
