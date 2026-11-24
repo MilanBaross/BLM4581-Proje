@@ -1,0 +1,99 @@
+@page
+@model KampusPortali.Pages.Yonetim.SinavFormModel
+@{
+    var baslik = Model.DuzenlemeMi ? "Sınavı Düzenle" : "Sınav Ekle";
+    ViewData["Title"] = baslik;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Yonetim/Index">Yönetim Paneli</a></li>
+        <li class="breadcrumb-item"><a asp-page="/Yonetim/Sinavlar">Sınav Takvimi</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@baslik</li>
+    </ol>
+</nav>
+
+<div class="sayfa-baslik">
+    <h1>@baslik</h1>
+    <p>Sınavın dersini, türünü, zamanını ve yapılacağı derslikleri girin. Öğrenciler Derslik Bulucu'da seçtikleri derslerin sınavlarını görür.</p>
+</div>
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="panel-kart">
+            <form method="post" asp-route-id="@Model.Id">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
+
+                <div class="row g-3">
+                    <div class="col-12 col-md-8">
+                        <label asp-for="Girdi.DersKodu" class="form-label"></label>
+                        <select asp-for="Girdi.DersKodu" asp-items="Model.DersSecenekleri" class="form-select">
+                            <option value="">Ders seçin</option>
+                        </select>
+                        <span asp-validation-for="Girdi.DersKodu" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label asp-for="Girdi.Tur" class="form-label"></label>
+                        <select asp-for="Girdi.Tur" asp-items="Model.TurSecenekleri" class="form-select">
+                            <option value="">Seçin</option>
+                        </select>
+                        <span asp-validation-for="Girdi.Tur" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label asp-for="Girdi.Tarih" class="form-label"></label>
+                        <input asp-for="Girdi.Tarih" type="date" class="form-control" />
+                        <span asp-validation-for="Girdi.Tarih" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label asp-for="Girdi.BaslangicSaati" class="form-label"></label>
+                        <input asp-for="Girdi.BaslangicSaati" type="time" step="300" class="form-control" />
+                        <span asp-validation-for="Girdi.BaslangicSaati" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <label asp-for="Girdi.BitisSaati" class="form-label"></label>
+                        <input asp-for="Girdi.BitisSaati" type="time" step="300" class="form-control" />
+                        <span asp-validation-for="Girdi.BitisSaati" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <span class="form-label d-block">Derslikler</span>
+                        <div class="derslik-secimi">
+                            @foreach (var bina in Model.Derslikler.GroupBy(d => d.Mekan?.Ad ?? "Kampüs dışı"))
+                            {
+                                <div class="derslik-secimi-grup">
+                                    <span class="derslik-secimi-bina">@bina.Key</span>
+                                    <div class="derslik-secimi-liste">
+                                        @foreach (var derslik in bina)
+                                        {
+                                            <label class="derslik-secimi-oge">
+                                                <input type="checkbox" class="form-check-input" name="Girdi.DerslikIdleri" value="@derslik.Id"
+                                                       checked="@(Model.Girdi.DerslikIdleri.Contains(derslik.Id))" />
+                                                @derslik.Ad
+                                            </label>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <span asp-validation-for="Girdi.DerslikIdleri" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-lg"></i> @(Model.DuzenlemeMi ? "Kaydet" : "Sınavı Ekle")
+                    </button>
+                    <a asp-page="/Yonetim/Sinavlar" class="btn btn-outline-secondary">Vazgeç</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

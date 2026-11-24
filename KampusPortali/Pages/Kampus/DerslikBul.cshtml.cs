@@ -164,12 +164,19 @@ namespace KampusPortali.Pages.Kampus
                     .FirstOrDefault();
             }
 
-            Sinavlar = await _context.Sinavlar
+            var bugun = DateOnly.FromDateTime(Simdi);
+            var sinavlar = await _context.Sinavlar
                 .Include(s => s.Derslik).ThenInclude(dl => dl!.Mekan)
-                .Where(s => s.Tarih >= DateOnly.FromDateTime(Simdi) && kodlar.Contains(s.DersKodu))
-                .OrderBy(s => s.Tarih)
-                .ThenBy(s => s.BaslangicSaati)
+                .Where(s => kodlar.Contains(s.DersKodu))
                 .ToListAsync();
+
+            Sinavlar = sinavlar
+                .Where(s => s.Tarih >= bugun)
+                .OrderBy(s => s.Tarih).ThenBy(s => s.BaslangicSaati)
+                .Concat(sinavlar
+                    .Where(s => s.Tarih < bugun)
+                    .OrderByDescending(s => s.Tarih).ThenBy(s => s.BaslangicSaati))
+                .ToList();
         }
 
         private async Task BosDerslikleriBulAsync()

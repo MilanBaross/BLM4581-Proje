@@ -265,7 +265,15 @@ else
         </section>
 
         <section class="bolum">
-            <h2 class="bolum-baslik">Yaklaşan Sınavlar</h2>
+            <h2 class="bolum-baslik">
+                Sınavlar
+                @if (User.IsInRole(Roller.Yonetici))
+                {
+                    <a asp-page="/Yonetim/SinavForm" class="btn btn-sm btn-outline-primary ms-auto fw-normal">
+                        <i class="bi bi-plus-lg"></i> Sınav ekle
+                    </a>
+                }
+            </h2>
             <partial name="_SinavListesi" model="Model.Sinavlar" />
         </section>
     }
