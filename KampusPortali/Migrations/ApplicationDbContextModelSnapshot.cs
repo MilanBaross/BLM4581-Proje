@@ -172,7 +172,7 @@ namespace KampusPortali.Migrations
                             Id = 6,
                             BaslangicSaati = new TimeOnly(15, 30, 0),
                             BitisSaati = new TimeOnly(18, 20, 0),
-                            DersAdi = "COM1015",
+                            DersAdi = "INTRODUCTION TO COMPUTER SCIENCE",
                             DerslikId = 2,
                             Grup = "İngilizce 1. Sınıf",
                             Gun = 4,
@@ -220,7 +220,7 @@ namespace KampusPortali.Migrations
                             Id = 10,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "COM2077",
+                            DersAdi = "DIGITAL LOGIC DESIGN",
                             DerslikId = 1,
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 1,
@@ -232,7 +232,7 @@ namespace KampusPortali.Migrations
                             Id = 11,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "COM2039",
+                            DersAdi = "DISCRETE STRUCTURES",
                             DerslikId = 1,
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 2,
@@ -244,7 +244,7 @@ namespace KampusPortali.Migrations
                             Id = 12,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "COM2067",
+                            DersAdi = "DATA STRUCTURES",
                             DerslikId = 2,
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 2,
@@ -256,7 +256,7 @@ namespace KampusPortali.Migrations
                             Id = 13,
                             BaslangicSaati = new TimeOnly(16, 30, 0),
                             BitisSaati = new TimeOnly(18, 20, 0),
-                            DersAdi = "COM2067 Laboratuvarı",
+                            DersAdi = "DATA STRUCTURES",
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 2,
                             Kod = "COM2067",
@@ -267,7 +267,7 @@ namespace KampusPortali.Migrations
                             Id = 14,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(11, 20, 0),
-                            DersAdi = "COM2077 Laboratuvarı",
+                            DersAdi = "DIGITAL LOGIC DESIGN",
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 3,
                             Kod = "COM2077",
@@ -278,7 +278,7 @@ namespace KampusPortali.Migrations
                             Id = 15,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "COM2501",
+                            DersAdi = "SCIENTIFIC PROGRAMMING",
                             DerslikId = 2,
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 3,
@@ -290,7 +290,7 @@ namespace KampusPortali.Migrations
                             Id = 16,
                             BaslangicSaati = new TimeOnly(15, 30, 0),
                             BitisSaati = new TimeOnly(18, 20, 0),
-                            DersAdi = "COM2043",
+                            DersAdi = "PROGRAMMING LANGUAGE CONCEPTS",
                             DerslikId = 1,
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 4,
@@ -302,7 +302,7 @@ namespace KampusPortali.Migrations
                             Id = 17,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "COM2043 Laboratuvarı",
+                            DersAdi = "PROGRAMMING LANGUAGE CONCEPTS",
                             Grup = "İngilizce 2. Sınıf",
                             Gun = 5,
                             Kod = "COM2043",
@@ -325,7 +325,7 @@ namespace KampusPortali.Migrations
                             Id = 19,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "COM3533",
+                            DersAdi = "NUMERICAL ANALYSIS METHODS",
                             DerslikId = 3,
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 1,
@@ -337,7 +337,7 @@ namespace KampusPortali.Migrations
                             Id = 20,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "COM3023",
+                            DersAdi = "MICROPROCESSORS AND EMBEDDED SYSTEMS",
                             DerslikId = 4,
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 3,
@@ -349,7 +349,7 @@ namespace KampusPortali.Migrations
                             Id = 21,
                             BaslangicSaati = new TimeOnly(14, 0, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "COM3033",
+                            DersAdi = "OPERATING SYSTEMS",
                             DerslikId = 1,
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 3,
@@ -361,7 +361,7 @@ namespace KampusPortali.Migrations
                             Id = 22,
                             BaslangicSaati = new TimeOnly(10, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "COM3073",
+                            DersAdi = "OCCUPATIONAL HEALTH AND SAFETY I",
                             DerslikId = 9,
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 4,
@@ -373,7 +373,7 @@ namespace KampusPortali.Migrations
                             Id = 23,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "COM3033 Laboratuvarı",
+                            DersAdi = "OPERATING SYSTEMS",
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 4,
                             Kod = "COM3033",
@@ -384,7 +384,7 @@ namespace KampusPortali.Migrations
                             Id = 24,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "COM3551",
+                            DersAdi = "ARTIFICIAL INTELLIGENCE",
                             DerslikId = 1,
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 5,
@@ -396,7 +396,7 @@ namespace KampusPortali.Migrations
                             Id = 25,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "COM3067",
+                            DersAdi = "ALGORITHMS",
                             DerslikId = 2,
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 5,
@@ -408,7 +408,7 @@ namespace KampusPortali.Migrations
                             Id = 26,
                             BaslangicSaati = new TimeOnly(16, 30, 0),
                             BitisSaati = new TimeOnly(18, 20, 0),
-                            DersAdi = "COM3067 Laboratuvarı",
+                            DersAdi = "ALGORITHMS",
                             Grup = "İngilizce 3. Sınıf",
                             Gun = 5,
                             Kod = "COM3067",
@@ -431,7 +431,7 @@ namespace KampusPortali.Migrations
                             Id = 28,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "COM4541",
+                            DersAdi = "AI-ASSISTED SOFTWARE ENGINEERING",
                             DerslikId = 4,
                             Grup = "İngilizce 4. Sınıf",
                             Gun = 2,
@@ -539,7 +539,7 @@ namespace KampusPortali.Migrations
                             Id = 37,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM1015",
+                            DersAdi = "Bilgisayar Bilimlerine Giriş",
                             DerslikId = 1,
                             Grup = "Türkçe 1. Sınıf",
                             Gun = 4,
@@ -562,7 +562,7 @@ namespace KampusPortali.Migrations
                             Id = 39,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(11, 20, 0),
-                            DersAdi = "BLM2077 Laboratuvarı",
+                            DersAdi = "Sayısal Mantık Tasarımı",
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 2,
                             Kod = "BLM2077",
@@ -573,7 +573,7 @@ namespace KampusPortali.Migrations
                             Id = 40,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM2501",
+                            DersAdi = "Bilimsel Programlama",
                             DerslikId = 6,
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 2,
@@ -585,7 +585,7 @@ namespace KampusPortali.Migrations
                             Id = 41,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM2043",
+                            DersAdi = "Programlama Dili Kavramları",
                             DerslikId = 2,
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 3,
@@ -597,7 +597,7 @@ namespace KampusPortali.Migrations
                             Id = 42,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(15, 20, 0),
-                            DersAdi = "BLM2043 Laboratuvarı",
+                            DersAdi = "Programlama Dili Kavramları",
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 3,
                             Kod = "BLM2043",
@@ -608,7 +608,7 @@ namespace KampusPortali.Migrations
                             Id = 43,
                             BaslangicSaati = new TimeOnly(15, 30, 0),
                             BitisSaati = new TimeOnly(17, 20, 0),
-                            DersAdi = "BLM2067 Laboratuvarı",
+                            DersAdi = "Veri Yapıları",
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 3,
                             Kod = "BLM2067",
@@ -619,7 +619,7 @@ namespace KampusPortali.Migrations
                             Id = 44,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM2067",
+                            DersAdi = "Veri Yapıları",
                             DerslikId = 2,
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 4,
@@ -631,7 +631,7 @@ namespace KampusPortali.Migrations
                             Id = 45,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM2537",
+                            DersAdi = "Ağ Tabanlı Programlamaya Giriş",
                             DerslikId = 1,
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 4,
@@ -643,7 +643,7 @@ namespace KampusPortali.Migrations
                             Id = 46,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM2077",
+                            DersAdi = "Sayısal Mantık Tasarımı",
                             DerslikId = 2,
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 5,
@@ -655,7 +655,7 @@ namespace KampusPortali.Migrations
                             Id = 47,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM2039",
+                            DersAdi = "Ayrık Yapılar",
                             DerslikId = 4,
                             Grup = "Türkçe 2. Sınıf",
                             Gun = 5,
@@ -667,7 +667,7 @@ namespace KampusPortali.Migrations
                             Id = 48,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(11, 20, 0),
-                            DersAdi = "BLM3023 Laboratuvarı",
+                            DersAdi = "Mikroişlemciler ve Gömülü Sistemler",
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 1,
                             Kod = "BLM3023",
@@ -678,7 +678,7 @@ namespace KampusPortali.Migrations
                             Id = 49,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(15, 20, 0),
-                            DersAdi = "BLM3033 Laboratuvarı",
+                            DersAdi = "İşletim Sistemleri",
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 1,
                             Kod = "BLM3033",
@@ -689,7 +689,7 @@ namespace KampusPortali.Migrations
                             Id = 50,
                             BaslangicSaati = new TimeOnly(15, 30, 0),
                             BitisSaati = new TimeOnly(17, 20, 0),
-                            DersAdi = "BLM3067 Laboratuvarı",
+                            DersAdi = "Algoritmalar",
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 1,
                             Kod = "BLM3067",
@@ -700,7 +700,7 @@ namespace KampusPortali.Migrations
                             Id = 51,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM3557",
+                            DersAdi = "Veri İletişimi",
                             DerslikId = 4,
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 2,
@@ -712,7 +712,7 @@ namespace KampusPortali.Migrations
                             Id = 52,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM3033",
+                            DersAdi = "İşletim Sistemleri",
                             DerslikId = 1,
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 2,
@@ -724,7 +724,7 @@ namespace KampusPortali.Migrations
                             Id = 53,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM3067",
+                            DersAdi = "Algoritmalar",
                             DerslikId = 1,
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 3,
@@ -736,7 +736,7 @@ namespace KampusPortali.Migrations
                             Id = 54,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM3533",
+                            DersAdi = "Sayısal Analiz Teknikleri",
                             DerslikId = 4,
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 3,
@@ -748,7 +748,7 @@ namespace KampusPortali.Migrations
                             Id = 55,
                             BaslangicSaati = new TimeOnly(14, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM3073",
+                            DersAdi = "İş Sağlığı ve Güvenliği I",
                             DerslikId = 9,
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 4,
@@ -760,7 +760,7 @@ namespace KampusPortali.Migrations
                             Id = 56,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM3551",
+                            DersAdi = "Yapay Zeka",
                             DerslikId = 4,
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 5,
@@ -772,7 +772,7 @@ namespace KampusPortali.Migrations
                             Id = 57,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM3023",
+                            DersAdi = "Mikroişlemciler ve Gömülü Sistemler",
                             DerslikId = 1,
                             Grup = "Türkçe 3. Sınıf",
                             Gun = 5,
@@ -784,7 +784,7 @@ namespace KampusPortali.Migrations
                             Id = 58,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM4551",
+                            DersAdi = "Mobil Cihazlar İçin Android İşletim Sistemi",
                             DerslikId = 7,
                             Grup = "Türkçe 4. Sınıf",
                             Gun = 1,
@@ -808,7 +808,7 @@ namespace KampusPortali.Migrations
                             Id = 60,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM4583",
+                            DersAdi = "Nesne Yönelimli Yazılım Modelleme",
                             DerslikId = 5,
                             Grup = "Türkçe 4. Sınıf",
                             Gun = 2,
@@ -820,7 +820,7 @@ namespace KampusPortali.Migrations
                             Id = 61,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM4541",
+                            DersAdi = "Yapay Zeka Destekli Yazılım Mühendisliği",
                             DerslikId = 3,
                             Grup = "Türkçe 4. Sınıf",
                             Gun = 2,
@@ -844,7 +844,7 @@ namespace KampusPortali.Migrations
                             Id = 63,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM4587",
+                            DersAdi = "IOS ile Mobil Uygulama Geliştirme I",
                             DerslikId = 3,
                             Grup = "Türkçe 4. Sınıf",
                             Gun = 3,
@@ -856,7 +856,7 @@ namespace KampusPortali.Migrations
                             Id = 64,
                             BaslangicSaati = new TimeOnly(9, 30, 0),
                             BitisSaati = new TimeOnly(12, 20, 0),
-                            DersAdi = "BLM4559",
+                            DersAdi = "Uzaktan Algılama",
                             DerslikId = 3,
                             Grup = "Türkçe 4. Sınıf",
                             Gun = 5,
@@ -868,7 +868,7 @@ namespace KampusPortali.Migrations
                             Id = 65,
                             BaslangicSaati = new TimeOnly(13, 30, 0),
                             BitisSaati = new TimeOnly(16, 20, 0),
-                            DersAdi = "BLM4561",
+                            DersAdi = "Bilgi Teknolojileri Yönetimi",
                             DerslikId = 3,
                             Grup = "Türkçe 4. Sınıf",
                             Gun = 5,
@@ -1008,6 +1008,62 @@ namespace KampusPortali.Migrations
                             Ad = "D Blok Servis Lab",
                             MusaitMi = true,
                             Not = "Tandoğan Yerleşkesi"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Ad = "G1 Dersliği",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Mühendisliği binası"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Ad = "G2 Dersliği",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Mühendisliği binası"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Ad = "G3 Dersliği",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Mühendisliği binası"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Ad = "G4 Dersliği",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Mühendisliği binası"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Ad = "F1 Dersliği",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Mühendisliği binası (eski J1)"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Ad = "F2 Dersliği",
+                            MekanId = 5,
+                            MusaitMi = true,
+                            Not = "Yapay Zeka Mühendisliği binası (eski J2)"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Ad = "BME1 Dersliği",
+                            MekanId = 6,
+                            MusaitMi = true,
+                            Not = "Biyomedikal Mühendisliği Bölümü dersliği"
                         });
                 });
 
@@ -1892,6 +1948,838 @@ namespace KampusPortali.Migrations
                     b.HasIndex("DerslikId");
 
                     b.ToTable("Sinavlar");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1001,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "BLM4559",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1002,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "COM3067",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1003,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "COM3067",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1004,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "COM3067",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1005,
+                            BaslangicSaati = new TimeOnly(15, 0, 0),
+                            BitisSaati = new TimeOnly(16, 30, 0),
+                            DersKodu = "BLM2039",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1006,
+                            BaslangicSaati = new TimeOnly(15, 0, 0),
+                            BitisSaati = new TimeOnly(16, 30, 0),
+                            DersKodu = "BLM2039",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1007,
+                            BaslangicSaati = new TimeOnly(15, 0, 0),
+                            BitisSaati = new TimeOnly(16, 30, 0),
+                            DersKodu = "BLM2039",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1008,
+                            BaslangicSaati = new TimeOnly(16, 45, 0),
+                            BitisSaati = new TimeOnly(18, 15, 0),
+                            DersKodu = "BLM3551",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1009,
+                            BaslangicSaati = new TimeOnly(16, 45, 0),
+                            BitisSaati = new TimeOnly(18, 15, 0),
+                            DersKodu = "BLM3551",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 16),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1010,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "COM1007",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1011,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "COM1007",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1012,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "COM1007",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1013,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM3533",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1014,
+                            BaslangicSaati = new TimeOnly(11, 15, 0),
+                            BitisSaati = new TimeOnly(12, 45, 0),
+                            DersKodu = "COM3023",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1015,
+                            BaslangicSaati = new TimeOnly(11, 15, 0),
+                            BitisSaati = new TimeOnly(12, 45, 0),
+                            DersKodu = "COM3023",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1016,
+                            BaslangicSaati = new TimeOnly(11, 15, 0),
+                            BitisSaati = new TimeOnly(12, 45, 0),
+                            DersKodu = "BLM2501",
+                            DerslikId = 14,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1017,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "COM2077",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1018,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "COM2077",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1019,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "BLM4583",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1020,
+                            BaslangicSaati = new TimeOnly(14, 45, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "BLM2077",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1021,
+                            BaslangicSaati = new TimeOnly(14, 45, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "BLM2077",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1022,
+                            BaslangicSaati = new TimeOnly(14, 45, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "BLM2077",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1023,
+                            BaslangicSaati = new TimeOnly(15, 0, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "ENG201",
+                            DerslikId = 19,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1024,
+                            BaslangicSaati = new TimeOnly(15, 0, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "ENG201",
+                            DerslikId = 10,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1025,
+                            BaslangicSaati = new TimeOnly(16, 30, 0),
+                            BitisSaati = new TimeOnly(17, 45, 0),
+                            DersKodu = "ENG101",
+                            DerslikId = 19,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1026,
+                            BaslangicSaati = new TimeOnly(16, 30, 0),
+                            BitisSaati = new TimeOnly(17, 45, 0),
+                            DersKodu = "ENG101",
+                            DerslikId = 10,
+                            Tarih = new DateOnly(2026, 11, 17),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1027,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM1007",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1028,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM1007",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1029,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM1007",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1030,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "COM1015",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1031,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "COM1015",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1032,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "COM1015",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1033,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 0, 0),
+                            DersKodu = "COM2043",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1034,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 0, 0),
+                            DersKodu = "COM2043",
+                            DerslikId = 14,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1035,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 0, 0),
+                            DersKodu = "BLM3023",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1036,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 0, 0),
+                            DersKodu = "BLM3023",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1037,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(17, 0, 0),
+                            DersKodu = "BLM2043",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1038,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(17, 0, 0),
+                            DersKodu = "BLM2043",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1039,
+                            BaslangicSaati = new TimeOnly(15, 30, 0),
+                            BitisSaati = new TimeOnly(17, 0, 0),
+                            DersKodu = "BLM2043",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1040,
+                            BaslangicSaati = new TimeOnly(17, 15, 0),
+                            BitisSaati = new TimeOnly(18, 45, 0),
+                            DersKodu = "COM4573",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1041,
+                            BaslangicSaati = new TimeOnly(17, 15, 0),
+                            BitisSaati = new TimeOnly(18, 45, 0),
+                            DersKodu = "COM4573",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 18),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1042,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(10, 30, 0),
+                            DersKodu = "COM4569",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1043,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(10, 30, 0),
+                            DersKodu = "COM4569",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1044,
+                            BaslangicSaati = new TimeOnly(9, 0, 0),
+                            BitisSaati = new TimeOnly(10, 30, 0),
+                            DersKodu = "BLM4561",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1045,
+                            BaslangicSaati = new TimeOnly(10, 45, 0),
+                            BitisSaati = new TimeOnly(12, 15, 0),
+                            DersKodu = "MAT0143",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1046,
+                            BaslangicSaati = new TimeOnly(10, 45, 0),
+                            BitisSaati = new TimeOnly(12, 15, 0),
+                            DersKodu = "MAT0143",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1047,
+                            BaslangicSaati = new TimeOnly(10, 45, 0),
+                            BitisSaati = new TimeOnly(12, 15, 0),
+                            DersKodu = "MAT0143",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1048,
+                            BaslangicSaati = new TimeOnly(12, 30, 0),
+                            BitisSaati = new TimeOnly(13, 30, 0),
+                            DersKodu = "BLM3557",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1049,
+                            BaslangicSaati = new TimeOnly(12, 30, 0),
+                            BitisSaati = new TimeOnly(13, 30, 0),
+                            DersKodu = "BLM3557",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1050,
+                            BaslangicSaati = new TimeOnly(14, 0, 0),
+                            BitisSaati = new TimeOnly(15, 30, 0),
+                            DersKodu = "BLM3073",
+                            DerslikId = 17,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1051,
+                            BaslangicSaati = new TimeOnly(14, 0, 0),
+                            BitisSaati = new TimeOnly(15, 30, 0),
+                            DersKodu = "BLM3073",
+                            DerslikId = 18,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1052,
+                            BaslangicSaati = new TimeOnly(14, 45, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "COM3073",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1053,
+                            BaslangicSaati = new TimeOnly(14, 45, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "COM3073",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 19),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1054,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "COM2067",
+                            DerslikId = 14,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1055,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "COM2067",
+                            DerslikId = 15,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1056,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM2067",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1057,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM2067",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1058,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM2067",
+                            DerslikId = 4,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1059,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "COM3033",
+                            DerslikId = 14,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1060,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "COM3033",
+                            DerslikId = 15,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1061,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "BLM3033",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1062,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "BLM3033",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1063,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(13, 0, 0),
+                            DersKodu = "BLM3033",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1064,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 0, 0),
+                            DersKodu = "MTH0143",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1065,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 0, 0),
+                            DersKodu = "MTH0143",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1066,
+                            BaslangicSaati = new TimeOnly(13, 30, 0),
+                            BitisSaati = new TimeOnly(15, 0, 0),
+                            DersKodu = "MTH0143",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1067,
+                            BaslangicSaati = new TimeOnly(15, 15, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "COM3533",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1068,
+                            BaslangicSaati = new TimeOnly(17, 0, 0),
+                            BitisSaati = new TimeOnly(18, 15, 0),
+                            DersKodu = "PHY0105",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1069,
+                            BaslangicSaati = new TimeOnly(17, 0, 0),
+                            BitisSaati = new TimeOnly(18, 15, 0),
+                            DersKodu = "PHY0105",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 20),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1070,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM1015",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1071,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM1015",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1072,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "BLM1015",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1073,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "COM3551",
+                            DerslikId = 14,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1074,
+                            BaslangicSaati = new TimeOnly(9, 30, 0),
+                            BitisSaati = new TimeOnly(11, 0, 0),
+                            DersKodu = "COM3551",
+                            DerslikId = 16,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1075,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(12, 30, 0),
+                            DersKodu = "FZM0105",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1076,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(12, 30, 0),
+                            DersKodu = "FZM0105",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1077,
+                            BaslangicSaati = new TimeOnly(11, 30, 0),
+                            BitisSaati = new TimeOnly(12, 30, 0),
+                            DersKodu = "FZM0105",
+                            DerslikId = 3,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1078,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "COM2039",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1079,
+                            BaslangicSaati = new TimeOnly(13, 0, 0),
+                            BitisSaati = new TimeOnly(14, 30, 0),
+                            DersKodu = "COM2039",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1080,
+                            BaslangicSaati = new TimeOnly(14, 45, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "BLM3067",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1081,
+                            BaslangicSaati = new TimeOnly(14, 45, 0),
+                            BitisSaati = new TimeOnly(16, 15, 0),
+                            DersKodu = "BLM3067",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1082,
+                            BaslangicSaati = new TimeOnly(16, 25, 0),
+                            BitisSaati = new TimeOnly(17, 45, 0),
+                            DersKodu = "COM4567",
+                            DerslikId = 1,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        },
+                        new
+                        {
+                            Id = 1083,
+                            BaslangicSaati = new TimeOnly(16, 25, 0),
+                            BitisSaati = new TimeOnly(17, 45, 0),
+                            DersKodu = "COM4567",
+                            DerslikId = 2,
+                            Tarih = new DateOnly(2026, 11, 21),
+                            Tur = "Vize"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

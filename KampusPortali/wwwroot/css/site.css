@@ -1756,3 +1756,71 @@ a.cizelge-ders:hover {
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   }
 }
+
+.sinav-gecmis {
+  opacity: 0.6;
+}
+
+.yonetim-kartlari {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.yonetim-kartlari .modul-karti {
+  min-height: 0;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+}
+
+.yonetim-kartlari .modul-ikon {
+  width: 34px;
+  height: 34px;
+  font-size: 1rem;
+}
+
+.yonetim-kartlari .modul-baslik {
+  font-size: 0.95rem;
+  margin-bottom: 0.1rem;
+}
+
+.yonetim-kartlari .modul-aciklama {
+  font-size: 0.8rem;
+  -webkit-line-clamp: 1;
+}
+
+.derslik-secimi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--kenar);
+  border-radius: 6px;
+}
+
+.derslik-secimi-bina {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--yazi-soluk);
+}
+
+.derslik-secimi-liste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
+
+.derslik-secimi-oge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.derslik-secimi-oge .form-check-input {
+  margin: 0;
+}

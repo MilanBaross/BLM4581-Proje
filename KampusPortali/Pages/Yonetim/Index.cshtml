@@ -9,14 +9,25 @@
     <p>Portal içeriği, kayıtlı kullanıcılar ve rolleri</p>
 </div>
 
-<a asp-page="/Yonetim/Duyurular" class="modul-karti mb-4">
-    <span class="modul-ikon"><i class="bi bi-megaphone"></i></span>
-    <span class="modul-metin">
-        <span class="modul-baslik">Duyuru Yönetimi</span>
-        <span class="modul-aciklama">Ana sayfadaki duyuruları ekleyin, düzenleyin veya silin.</span>
-    </span>
-    <i class="bi bi-chevron-right modul-ok"></i>
-</a>
+<div class="yonetim-kartlari">
+    <a asp-page="/Yonetim/Duyurular" class="modul-karti">
+        <span class="modul-ikon"><i class="bi bi-megaphone"></i></span>
+        <span class="modul-metin">
+            <span class="modul-baslik">Duyuru Yönetimi</span>
+            <span class="modul-aciklama">Ana sayfadaki duyuruları ekleyin, düzenleyin veya silin.</span>
+        </span>
+        <i class="bi bi-chevron-right modul-ok"></i>
+    </a>
+
+    <a asp-page="/Yonetim/Sinavlar" class="modul-karti">
+        <span class="modul-ikon"><i class="bi bi-journal-check"></i></span>
+        <span class="modul-metin">
+            <span class="modul-baslik">Sınav Takvimi</span>
+            <span class="modul-aciklama">Sınavların tarihini, saatini ve dersliklerini girin.</span>
+        </span>
+        <i class="bi bi-chevron-right modul-ok"></i>
+    </a>
+</div>
 
 <h2 class="bolum-baslik">Kullanıcılar</h2>
 

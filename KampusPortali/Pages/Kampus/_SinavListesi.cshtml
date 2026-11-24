@@ -1,23 +1,32 @@
 @model List<Sinav>
 @using System.Globalization
+@using KampusPortali.Yardimcilar
 @{
     var tr = new CultureInfo("tr-TR");
+    var bugun = DateOnly.FromDateTime(TurkiyeSaati.Simdi());
+    var gruplar = Model
+        .GroupBy(s => new { s.DersKodu, s.Tur, s.Tarih, s.BaslangicSaati, s.BitisSaati })
+        .ToList();
 }
 
-@if (Model.Count == 0)
+@if (gruplar.Count == 0)
 {
     <div class="panel-kart bos-durum">
         <i class="bi bi-journal-check"></i>
-        <h3>Sınav takvimi henüz eklenmedi</h3>
+        <h3>Seçtiğin dersler için sınav yok</h3>
         <p class="mb-0">Sınav tarihleri açıklandığında burada listelenecek.</p>
     </div>
 }
 else
 {
     <div class="panel-kart p-0">
-        @foreach (var sinav in Model)
+        @foreach (var grup in gruplar)
         {
-            <div class="duyuru">
+            var sinav = grup.First();
+            var derslikler = grup.Where(s => s.Derslik != null).Select(s => s.Derslik!).ToList();
+            var binalar = derslikler.Where(d => d.Mekan != null).Select(d => d.Mekan!).DistinctBy(m => m.Id).ToList();
+            var gecti = sinav.Tarih < bugun;
+            <div class="duyuru @(gecti ? "sinav-gecmis" : "")">
                 <div class="duyuru-tarih">
                     <span class="duyuru-gun">@sinav.Tarih.Day</span>
                     <span class="duyuru-ay">@sinav.Tarih.ToString("MMM", tr)</span>
@@ -26,13 +35,33 @@ else
                     <h3 class="duyuru-baslik">
                         @sinav.DersKodu
                         <span class="badge rozet-onemli ms-1">@sinav.Tur.GorunenAd()</span>
+                        @if (gecti)
+                        {
+                            <span class="badge rozet-kullanici ms-1">Tamamlandı</span>
+                        }
                     </h3>
                     <div class="duyuru-bilgi">
                         <i class="bi bi-calendar-event"></i> @sinav.Tarih.ToString("d MMMM yyyy, dddd", tr)
                         &middot; <i class="bi bi-clock"></i> @sinav.BaslangicSaati.ToString("HH:mm")-@sinav.BitisSaati.ToString("HH:mm")
                     </div>
                 </div>
-                <partial name="_DerslikKonumu" model="sinav.Derslik" />
+                <div class="derslik-konumu">
+                    @if (derslikler.Count == 0)
+                    {
+                        <span class="derslik-ad text-muted">Derslik belirtilmemiş</span>
+                    }
+                    else
+                    {
+                        <span class="derslik-ad"><i class="bi bi-door-open"></i> @string.Join(", ", derslikler.Select(d => d.Ad))</span>
+                        @foreach (var bina in binalar)
+                        {
+                            <span class="derslik-bina">@bina.Ad</span>
+                            <a asp-page="/Kampus/Harita" asp-route-mekan="@bina.Id" class="derslik-harita-link">
+                                <i class="bi bi-geo-alt"></i> Haritada göster
+                            </a>
+                        }
+                    }
+                </div>
             </div>
         }
     </div>

@@ -1,0 +1,122 @@
+@page
+@model KampusPortali.Pages.Yonetim.SinavlarModel
+@using System.Globalization
+@{
+    ViewData["Title"] = "Sınav Takvimi";
+    var tr = new CultureInfo("tr-TR");
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Yonetim/Index">Yönetim Paneli</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sınav Takvimi</li>
+    </ol>
+</nav>
+
+<div class="sayfa-baslik d-flex flex-wrap align-items-start justify-content-between gap-3">
+    <div>
+        <h1>Sınav Takvimi</h1>
+        <p>Sınavları ekleyin, düzenleyin veya silin. Öğrenciler sınavlarının yerini Derslik Bulucu'da görür.</p>
+    </div>
+    <a asp-page="/Yonetim/SinavForm" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Sınav Ekle
+    </a>
+</div>
+
+@foreach (var (baslik, liste, bosMetin) in new[]
+{
+    ("Yaklaşan Sınavlar", Model.Yaklasanlar, "Yaklaşan sınav yok."),
+    ("Geçmiş Sınavlar", Model.Gecmisler, "Geçmiş sınav yok.")
+})
+{
+    <section class="bolum">
+        <h2 class="bolum-baslik">@baslik (@liste.Count)</h2>
+
+        @if (liste.Count == 0)
+        {
+            <div class="panel-kart bos-durum">
+                <i class="bi bi-journal-check"></i>
+                <h3>@bosMetin</h3>
+            </div>
+        }
+        else
+        {
+            <div class="panel-kart p-0">
+                @foreach (var grup in liste)
+                {
+                    var sinav = grup.Sinav;
+                    Model.DersAdlari.TryGetValue(sinav.DersKodu, out var dersAdi);
+                    <article class="duyuru flex-wrap flex-sm-nowrap">
+                        <div class="duyuru-tarih">
+                            <span class="duyuru-gun">@sinav.Tarih.Day</span>
+                            <span class="duyuru-ay">@sinav.Tarih.ToString("MMM", tr)</span>
+                        </div>
+                        <div class="duyuru-icerik flex-grow-1">
+                            <h3 class="duyuru-baslik">
+                                @sinav.DersKodu
+                                @if (!string.IsNullOrEmpty(dersAdi) && dersAdi != sinav.DersKodu)
+                                {
+                                    <span class="fw-normal">· @dersAdi</span>
+                                }
+                                <span class="badge rozet-onemli ms-1">@sinav.Tur.GorunenAd()</span>
+                            </h3>
+                            <div class="duyuru-bilgi">
+                                <i class="bi bi-calendar-event"></i> @sinav.Tarih.ToString("d MMMM yyyy, dddd", tr)
+                                &middot; <i class="bi bi-clock"></i> @sinav.BaslangicSaati.ToString("HH:mm")-@sinav.BitisSaati.ToString("HH:mm")
+                                &middot; <i class="bi bi-door-open"></i> @(grup.Derslikler.Count == 0 ? "Derslik belirtilmemiş" : string.Join(", ", grup.Derslikler.Select(d => d.Ad)))
+                                @{ var binalar = grup.Derslikler.Where(d => d.Mekan != null).Select(d => d.Mekan!.Ad).Distinct().ToList(); }
+                                @if (binalar.Count > 0)
+                                {
+                                    <text>(@string.Join(", ", binalar))</text>
+                                }
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 align-self-center ms-sm-auto">
+                            <a asp-page="/Yonetim/SinavForm" asp-route-id="@sinav.Id" class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-pencil"></i> Düzenle
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                    data-bs-toggle="modal" data-bs-target="#silOnayi"
+                                    data-id="@sinav.Id" data-baslik="@sinav.DersKodu @sinav.Tur.GorunenAd() (@sinav.Tarih.ToString("d MMMM", tr))">
+                                <i class="bi bi-trash"></i> Sil
+                            </button>
+                        </div>
+                    </article>
+                }
+            </div>
+        }
+    </section>
+}
+
+<div class="modal fade" id="silOnayi" tabindex="-1" aria-labelledby="silOnayiBaslik" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="silOnayiBaslik">Sınavı sil</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                "<span id="silinecekSinav"></span>" sınavı kalıcı olarak silinecek. Emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <form method="post" asp-page-handler="Sil">
+                    <input type="hidden" name="id" id="silinecekId" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Sil
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("silOnayi").addEventListener("show.bs.modal", function (olay) {
+            var dugme = olay.relatedTarget;
+            document.getElementById("silinecekId").value = dugme.dataset.id;
+            document.getElementById("silinecekSinav").textContent = dugme.dataset.baslik;
+        });
+    </script>
+}
