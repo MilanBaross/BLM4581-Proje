@@ -91,6 +91,9 @@ namespace KampusPortali.Data
                 .HasIndex(s => s.DersKodu);
 
             modelBuilder.Entity<Sinav>()
+                .HasData(SinavTohumVerisi.Sinavlar);
+
+            modelBuilder.Entity<Sinav>()
                 .HasOne(s => s.Derslik)
                 .WithMany(d => d.Sinavlar)
                 .HasForeignKey(s => s.DerslikId)
