@@ -30,5 +30,7 @@ namespace KampusPortali.Models
         public string? Aciklama { get; set; }
 
         public ICollection<Derslik> Derslikler { get; set; } = new List<Derslik>();
+
+        public ICollection<KantinUrunu> Urunler { get; set; } = new List<KantinUrunu>();
     }
 }
