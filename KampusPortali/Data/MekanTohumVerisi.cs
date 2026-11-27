@@ -130,7 +130,7 @@ namespace KampusPortali.Data
             {
                 Id = 13,
                 Ad = "Sağlık Kültür Spor Daire Başkanlığı",
-                Tur = MekanTuru.Diger,
+                Tur = MekanTuru.Yemekhane,
                 Enlem = 39.779599,
                 Boylam = 32.817242,
                 Aciklama = null,
