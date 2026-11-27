@@ -1,7 +1,217 @@
 @page
+@model KampusPortali.Pages.Kampus.YemekhaneModel
+@using System.Globalization
 @{
     var modul = Moduller.Yemekhane;
     ViewData["Title"] = modul.Baslik;
+    var tr = new CultureInfo("tr-TR");
+    string GunEtiketi(DateOnly gun)
+    {
+        var ad = gun.ToString("d MMMM dddd", tr);
+        if (gun == Model.Bugun) return $"Bugün · {ad}";
+        if (gun == Model.Bugun.AddDays(1)) return $"Yarın · {ad}";
+        return ad;
+    }
+    string Fiyat(decimal fiyat) => fiyat.ToString("N2", tr) + " ₺";
+    string TarihMetni(DateOnly gun) => gun.ToString("yyyy-MM-dd");
 }
 
-<partial name="_ModulIskeleti" model="modul" />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Ana Sayfa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@modul.Baslik</li>
+    </ol>
+</nav>
+
+<div class="modul-ust">
+    <span class="modul-ust-ikon"><i class="bi @modul.Ikon"></i></span>
+    <div>
+        <h1>@modul.Baslik</h1>
+        <p class="mb-0">Yemekhanenin günlük menüsüne ve kantinlerdeki ürün fiyatlarına göz atın.</p>
+    </div>
+</div>
+
+<nav class="derslik-sekmeler" aria-label="Görünüm">
+    <a asp-page="/Kampus/Yemekhane" class="derslik-sekme @(!Model.KantinSekmesi ? "aktif" : "")">
+        <i class="bi bi-egg-fried"></i> Yemek Menüsü
+    </a>
+    <a asp-page="/Kampus/Yemekhane" asp-route-gorunum="kantin" class="derslik-sekme @(Model.KantinSekmesi ? "aktif" : "")">
+        <i class="bi bi-shop"></i> Kantinler
+    </a>
+</nav>
+
+@if (!Model.KantinSekmesi)
+{
+    <section class="bolum">
+        <div class="menu-gun-gecis">
+            <a asp-page="/Kampus/Yemekhane" asp-route-tarih="@TarihMetni(Model.SeciliGun.AddDays(-1))" class="btn btn-light btn-sm" aria-label="Önceki gün">
+                <i class="bi bi-chevron-left"></i>
+            </a>
+            <h2 class="bolum-baslik mb-0">@GunEtiketi(Model.SeciliGun)</h2>
+            <a asp-page="/Kampus/Yemekhane" asp-route-tarih="@TarihMetni(Model.SeciliGun.AddDays(1))" class="btn btn-light btn-sm" aria-label="Sonraki gün">
+                <i class="bi bi-chevron-right"></i>
+            </a>
+            @if (Model.SeciliGun != Model.Bugun)
+            {
+                <a asp-page="/Kampus/Yemekhane" class="btn btn-link btn-sm ms-auto">Bugüne dön</a>
+            }
+        </div>
+
+        @if (Model.SeciliMenu is YemekMenusu menu)
+        {
+            <div class="panel-kart menu-kart">
+                <ul class="menu-listesi">
+                    <li><span class="menu-etiket">Çorba</span><span class="menu-yemek">@menu.Corba</span></li>
+                    <li><span class="menu-etiket">Ana Yemek</span><span class="menu-yemek">@menu.AnaYemek</span></li>
+                    @if (!string.IsNullOrEmpty(menu.YanYemek))
+                    {
+                        <li><span class="menu-etiket">Yan Yemek</span><span class="menu-yemek">@menu.YanYemek</span></li>
+                    }
+                    @if (!string.IsNullOrEmpty(menu.Tatli))
+                    {
+                        <li><span class="menu-etiket">Tatlı / Meyve</span><span class="menu-yemek">@menu.Tatli</span></li>
+                    }
+                </ul>
+                <div class="menu-alt">
+                    @if (!string.IsNullOrEmpty(menu.VejetaryenSecenek))
+                    {
+                        <span class="menu-vejetaryen"><i class="bi bi-flower1"></i> Vejetaryen: @menu.VejetaryenSecenek</span>
+                    }
+                    @if (menu.Kalori is int kalori)
+                    {
+                        <span class="badge rozet-kullanici">@kalori kcal</span>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="panel-kart bos-durum">
+                <i class="bi bi-calendar-x"></i>
+                <h3>Bu gün için menü yok</h3>
+                <p class="mb-0">
+                    @((Model.SeciliGun.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday)
+                        ? "Hafta sonları yemekhane menüsü yayımlanmıyor."
+                        : "Bu günün menüsü henüz girilmedi.")
+                </p>
+            </div>
+        }
+    </section>
+
+    @foreach (var bina in Model.YemekhaneBinalari)
+    {
+        <div class="panel-kart yemekhane-binasi">
+            <span class="modul-ikon"><i class="bi @bina.Tur.Ikon()"></i></span>
+            <div class="flex-grow-1">
+                <span class="kantin-tur">Yemekhane</span>
+                <span class="kantin-ad d-block">@bina.Ad</span>
+            </div>
+            <a asp-page="/Kampus/Harita" asp-route-mekanId="@bina.Id" class="btn btn-light btn-sm">
+                <i class="bi bi-geo-alt"></i> Haritada göster
+            </a>
+        </div>
+    }
+
+    <section class="bolum">
+        <div class="menu-gun-gecis">
+            <h2 class="bolum-baslik mb-0">
+                Haftalık Menü · @Model.HaftaBasi.ToString("d MMMM", tr) - @Model.HaftaBasi.AddDays(4).ToString("d MMMM", tr)
+            </h2>
+            <div class="ms-auto d-flex gap-2">
+                <a asp-page="/Kampus/Yemekhane" asp-route-tarih="@TarihMetni(Model.HaftaBasi.AddDays(-7))" class="btn btn-light btn-sm">
+                    <i class="bi bi-chevron-left"></i> Önceki hafta
+                </a>
+                <a asp-page="/Kampus/Yemekhane" asp-route-tarih="@TarihMetni(Model.HaftaBasi.AddDays(7))" class="btn btn-light btn-sm">
+                    Sonraki hafta <i class="bi bi-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="haftalik-menu">
+            @foreach (var gun in Model.HaftaGunleri)
+            {
+                var gunMenusu = Model.HaftalikMenu.GetValueOrDefault(gun);
+                <a asp-page="/Kampus/Yemekhane" asp-route-tarih="@TarihMetni(gun)"
+                   class="panel-kart haftalik-menu-gun @(gun == Model.SeciliGun ? "secili" : "")">
+                    <span class="haftalik-menu-baslik">
+                        @gun.ToString("dddd", tr)
+                        <span class="haftalik-menu-tarih">@gun.ToString("d MMM", tr)</span>
+                        @if (gun == Model.Bugun)
+                        {
+                            <span class="cizelge-bugun-rozet">Bugün</span>
+                        }
+                    </span>
+                    @if (gunMenusu != null)
+                    {
+                        <span>@gunMenusu.Corba</span>
+                        <span class="fw-semibold">@gunMenusu.AnaYemek</span>
+                        <span>@gunMenusu.YanYemek</span>
+                        <span>@gunMenusu.Tatli</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Menü girilmedi</span>
+                    }
+                </a>
+            }
+        </div>
+    </section>
+}
+else
+{
+    <section class="bolum">
+        @if (Model.Kantinler.Count == 0)
+        {
+            <div class="panel-kart bos-durum">
+                <i class="bi bi-shop"></i>
+                <h3>Kayıtlı kantin yok</h3>
+                <p class="mb-0">Kampüs kantinleri eklendiğinde burada listelenecek.</p>
+            </div>
+        }
+
+        @foreach (var kantin in Model.Kantinler)
+        {
+            <div class="panel-kart kantin-kart">
+                <div class="kantin-ust">
+                    <span class="modul-ikon"><i class="bi @kantin.Mekan.Tur.Ikon()"></i></span>
+                    <div class="flex-grow-1">
+                        <h2 class="kantin-ad">@kantin.Mekan.Ad</h2>
+                        <span class="kantin-tur">@kantin.Mekan.Tur.GorunenAd()</span>
+                    </div>
+                    <a asp-page="/Kampus/Harita" asp-route-mekanId="@kantin.Mekan.Id" class="btn btn-light btn-sm">
+                        <i class="bi bi-geo-alt"></i> Haritada göster
+                    </a>
+                </div>
+
+                @if (kantin.Kategoriler.Count == 0)
+                {
+                    <p class="text-muted mb-0">Bu kantin için ürün bilgisi henüz girilmedi.</p>
+                }
+
+                <div class="kantin-kategoriler">
+                    @foreach (var kategori in kantin.Kategoriler)
+                    {
+                        <div class="kantin-kategori">
+                            <h3 class="kantin-kategori-baslik"><i class="bi @kategori.Key.Ikon()"></i> @kategori.Key.GorunenAd()</h3>
+                            <ul class="urun-listesi">
+                                @foreach (var urun in kategori)
+                                {
+                                    <li class="@(urun.MevcutMu ? "" : "tukendi")">
+                                        <span class="urun-ad">
+                                            @urun.Ad
+                                            @if (!urun.MevcutMu)
+                                            {
+                                                <span class="badge rozet-kullanici">Tükendi</span>
+                                            }
+                                        </span>
+                                        <span class="urun-fiyat">@Fiyat(urun.Fiyat)</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </section>
+}
