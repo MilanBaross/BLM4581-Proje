@@ -1108,6 +1108,7 @@ namespace KampusPortali.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 100L, null, null, null, null, null);
 
                     b.Property<string>("Aciklama")
                         .IsRequired()
@@ -1124,6 +1125,9 @@ namespace KampusPortali.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
+                    b.Property<int?>("MekanId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("Tarih")
                         .HasColumnType("timestamp with time zone");
 
@@ -1134,7 +1138,293 @@ namespace KampusPortali.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MekanId");
+
+                    b.HasIndex("Tarih");
+
                     b.ToTable("Etkinlikler");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Aciklama = "Python ile ilk makine öğrenmesi modelimizi birlikte kuruyoruz. Bilgisayarını getirmen yeterli, ön bilgi gerekmiyor.",
+                            Baslik = "Yapay Zekâya Giriş Atölyesi",
+                            Konum = "Bilgisayar Mühendisliği Bölümü",
+                            MekanId = 2,
+                            Tarih = new DateTime(2026, 11, 18, 11, 0, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Yazılım Topluluğu"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Aciklama = "Gölbaşı kampüsünde sonbahar fotoğrafları çekiyoruz. Telefon kamerası da olur. Buluşma noktası Dekanlık önü.",
+                            Baslik = "Kampüs Fotoğraf Yürüyüşü",
+                            Konum = "Mühendislik Fakültesi Dekanlığı önü",
+                            MekanId = 9,
+                            Tarih = new DateTime(2026, 11, 21, 10, 30, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Fotoğrafçılık Kulübü"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Aciklama = "İsviçre sistemi 5 tur, 15+5 tempo. Kayıtlar etkinlik günü 13.30'a kadar alınır. İlk üçe kitap hediyesi var.",
+                            Baslik = "Satranç Turnuvası",
+                            Konum = "Point Cafe",
+                            MekanId = 12,
+                            Tarih = new DateTime(2026, 12, 2, 11, 0, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Satranç Kulübü"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Aciklama = "Dal açma, PR, merge ve çakışma çözme. Dönem projesi yapan herkes için pratik bir oturum.",
+                            Baslik = "Git ve GitHub Semineri",
+                            Konum = "Yazılım Mühendisliği Bölümü",
+                            MekanId = 3,
+                            Tarih = new DateTime(2026, 12, 4, 12, 0, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Yazılım Topluluğu"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Aciklama = "Sektörden konuğumuzla mikrodenetleyiciler, IoT ve staj fırsatları üzerine söyleşi.",
+                            Baslik = "Gömülü Sistemler Söyleşisi",
+                            Konum = "Elektrik-Elektronik Mühendisliği Bölümü",
+                            MekanId = 4,
+                            Tarih = new DateTime(2026, 12, 9, 11, 30, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Elektronik Topluluğu"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Aciklama = "Teknokent'teki girişimlerle tanışma, kısa sunumlar ve fikir maratonu tanıtımı.",
+                            Baslik = "Girişimcilik Günü",
+                            Konum = "Ankara Üniversitesi Teknokent",
+                            MekanId = 14,
+                            Tarih = new DateTime(2026, 12, 11, 10, 0, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Girişimcilik Kulübü"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Aciklama = "Topluluk grubumuzun dönem sonu konseri. Giriş ücretsiz, herkes davetli.",
+                            Baslik = "Kış Konseri",
+                            Konum = "Spor Bilimleri Fakültesi",
+                            MekanId = 11,
+                            Tarih = new DateTime(2026, 12, 16, 15, 0, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Müzik Topluluğu"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Aciklama = "Mogan Gölü çevresinde 8 km kolay parkur. Servis kampüsten kalkar, kayıt için kulüp masasına uğrayın.",
+                            Baslik = "Doğa Yürüyüşü: Mogan Gölü",
+                            Konum = "Kampüs girişi (servis kalkış noktası)",
+                            Tarih = new DateTime(2026, 12, 19, 6, 30, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Dağcılık Kulübü"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Aciklama = "Final haftası öncesi birlikte çalışma, ücretsiz çay ve kahve ikramı.",
+                            Baslik = "Final Haftası Çalışma Maratonu",
+                            Konum = "Point Cafe",
+                            MekanId = 12,
+                            Tarih = new DateTime(2026, 12, 23, 14, 0, 0, 0, DateTimeKind.Utc),
+                            ToplulukAdi = "Öğrenci Konseyi"
+                        });
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.KantinUrunu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 100L, null, null, null, null, null);
+
+                    b.Property<string>("Ad")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<decimal>("Fiyat")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("numeric(8,2)");
+
+                    b.Property<string>("Kategori")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<int>("MekanId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("MevcutMu")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MekanId");
+
+                    b.ToTable("KantinUrunleri");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ad = "Çay",
+                            Fiyat = 15m,
+                            Kategori = "SicakIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ad = "Türk Kahvesi",
+                            Fiyat = 60m,
+                            Kategori = "SicakIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ad = "Filtre Kahve",
+                            Fiyat = 70m,
+                            Kategori = "SicakIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Ad = "Latte",
+                            Fiyat = 85m,
+                            Kategori = "SicakIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Ad = "Sıcak Çikolata",
+                            Fiyat = 75m,
+                            Kategori = "SicakIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Ad = "Su (0,5 L)",
+                            Fiyat = 10m,
+                            Kategori = "SogukIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Ad = "Ayran",
+                            Fiyat = 25m,
+                            Kategori = "SogukIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Ad = "Meyve Suyu",
+                            Fiyat = 40m,
+                            Kategori = "SogukIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Ad = "Gazlı İçecek",
+                            Fiyat = 45m,
+                            Kategori = "SogukIcecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Ad = "Kaşarlı Tost",
+                            Fiyat = 90m,
+                            Kategori = "Yiyecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Ad = "Karışık Tost",
+                            Fiyat = 110m,
+                            Kategori = "Yiyecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Ad = "Tavuklu Sandviç",
+                            Fiyat = 120m,
+                            Kategori = "Yiyecek",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Ad = "Simit",
+                            Fiyat = 25m,
+                            Kategori = "Atistirmalik",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Ad = "Peynirli Poğaça",
+                            Fiyat = 30m,
+                            Kategori = "Atistirmalik",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Ad = "Çikolata",
+                            Fiyat = 40m,
+                            Kategori = "Atistirmalik",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Ad = "Kek",
+                            Fiyat = 50m,
+                            Kategori = "Tatli",
+                            MekanId = 12,
+                            MevcutMu = true
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Ad = "Cheesecake",
+                            Fiyat = 110m,
+                            Kategori = "Tatli",
+                            MekanId = 12,
+                            MevcutMu = false
+                        });
                 });
 
             modelBuilder.Entity("KampusPortali.Models.KayipEsya", b =>
@@ -1798,7 +2088,7 @@ namespace KampusPortali.Migrations
                             Boylam = 32.817242,
                             Enlem = 39.779598999999997,
                             Geometri = "{\"type\":\"Polygon\",\"coordinates\":[[[32.816799,39.779971],[32.816608,39.779522],[32.816797,39.779239],[32.817315,39.779108],[32.817724,39.779275],[32.817887,39.779657],[32.817691,39.77996],[32.817175,39.780096],[32.816799,39.779971]],[[32.817089,39.779747],[32.817171,39.779781],[32.8174,39.779717],[32.817433,39.779664],[32.817362,39.779499],[32.817278,39.779471],[32.817061,39.779528],[32.817024,39.779584],[32.817089,39.779747]]]}",
-                            Tur = "Diger"
+                            Tur = "Yemekhane"
                         },
                         new
                         {
@@ -2782,6 +3072,482 @@ namespace KampusPortali.Migrations
                         });
                 });
 
+            modelBuilder.Entity("KampusPortali.Models.YemekMenusu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.HasIdentityOptions(b.Property<int>("Id"), 1000L, null, null, null, null, null);
+
+                    b.Property<string>("AnaYemek")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<string>("Corba")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<int?>("Kalori")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly>("Tarih")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Tatli")
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<string>("VejetaryenSecenek")
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<string>("YanYemek")
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Tarih")
+                        .IsUnique();
+
+                    b.ToTable("YemekMenuleri");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AnaYemek = "Orman Kebabı",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1050,
+                            Tarih = new DateOnly(2026, 11, 23),
+                            Tatli = "Sütlaç",
+                            VejetaryenSecenek = "Sebzeli Türlü",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AnaYemek = "Tavuk Sote",
+                            Corba = "Ezogelin Çorbası",
+                            Kalori = 980,
+                            Tarih = new DateOnly(2026, 11, 24),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Zeytinyağlı Taze Fasulye",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AnaYemek = "Etli Kuru Fasulye",
+                            Corba = "Domates Çorbası",
+                            Kalori = 1120,
+                            Tarih = new DateOnly(2026, 11, 25),
+                            Tatli = "Turşu",
+                            VejetaryenSecenek = "Zeytinyağlı Kuru Fasulye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AnaYemek = "Fırında Köfte",
+                            Corba = "Yayla Çorbası",
+                            Kalori = 1150,
+                            Tarih = new DateOnly(2026, 11, 26),
+                            Tatli = "Revani",
+                            VejetaryenSecenek = "Sebze Graten",
+                            YanYemek = "Patates Püresi"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AnaYemek = "Fırın Tavuk",
+                            Corba = "Tarhana Çorbası",
+                            Kalori = 1010,
+                            Tarih = new DateOnly(2026, 11, 27),
+                            Tatli = "Ayran",
+                            VejetaryenSecenek = "Mantar Sote",
+                            YanYemek = "Şehriyeli Pilav"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AnaYemek = "Etli Nohut",
+                            Corba = "Sebze Çorbası",
+                            Kalori = 1080,
+                            Tarih = new DateOnly(2026, 11, 30),
+                            Tatli = "Cacık",
+                            VejetaryenSecenek = "Zeytinyağlı Nohut",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AnaYemek = "Tavuk Şiş",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1090,
+                            Tarih = new DateOnly(2026, 12, 1),
+                            Tatli = "Kemalpaşa Tatlısı",
+                            VejetaryenSecenek = "Sebzeli Bulgur",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AnaYemek = "İzmir Köfte",
+                            Corba = "Şehriye Çorbası",
+                            Kalori = 1060,
+                            Tarih = new DateOnly(2026, 12, 2),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Zeytinyağlı Pırasa",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AnaYemek = "Karnıyarık",
+                            Corba = "Ezogelin Çorbası",
+                            Kalori = 1000,
+                            Tarih = new DateOnly(2026, 12, 3),
+                            Tatli = "Yoğurt",
+                            VejetaryenSecenek = "İmam Bayıldı",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AnaYemek = "Tavuk Döner",
+                            Corba = "Yayla Çorbası",
+                            Kalori = 1170,
+                            Tarih = new DateOnly(2026, 12, 4),
+                            Tatli = "Supangle",
+                            VejetaryenSecenek = "Sebzeli Makarna",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AnaYemek = "Etli Bezelye",
+                            Corba = "Domates Çorbası",
+                            Kalori = 990,
+                            Tarih = new DateOnly(2026, 12, 7),
+                            Tatli = "Ayran",
+                            VejetaryenSecenek = "Zeytinyağlı Bezelye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AnaYemek = "Fırında Makarna",
+                            Corba = "Tarhana Çorbası",
+                            Kalori = 1110,
+                            Tarih = new DateOnly(2026, 12, 8),
+                            Tatli = "Puding",
+                            VejetaryenSecenek = "Peynirli Makarna",
+                            YanYemek = "Mevsim Salata"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AnaYemek = "Tas Kebabı",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1070,
+                            Tarih = new DateOnly(2026, 12, 9),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Ispanaklı Börek",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AnaYemek = "Tavuk Haşlama",
+                            Corba = "Sebze Çorbası",
+                            Kalori = 980,
+                            Tarih = new DateOnly(2026, 12, 10),
+                            Tatli = "Kazandibi",
+                            VejetaryenSecenek = "Sebzeli Pilav",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AnaYemek = "Kadınbudu Köfte",
+                            Corba = "Ezogelin Çorbası",
+                            Kalori = 1140,
+                            Tarih = new DateOnly(2026, 12, 11),
+                            Tatli = "Cacık",
+                            VejetaryenSecenek = "Mücver",
+                            YanYemek = "Patates Püresi"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AnaYemek = "Etli Kuru Fasulye",
+                            Corba = "Yayla Çorbası",
+                            Kalori = 1120,
+                            Tarih = new DateOnly(2026, 12, 14),
+                            Tatli = "Turşu",
+                            VejetaryenSecenek = "Zeytinyağlı Kuru Fasulye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AnaYemek = "Tavuk Pirzola",
+                            Corba = "Şehriye Çorbası",
+                            Kalori = 1160,
+                            Tarih = new DateOnly(2026, 12, 15),
+                            Tatli = "Şekerpare",
+                            VejetaryenSecenek = "Mantarlı Makarna",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AnaYemek = "Etli Taze Fasulye",
+                            Corba = "Domates Çorbası",
+                            Kalori = 960,
+                            Tarih = new DateOnly(2026, 12, 16),
+                            Tatli = "Yoğurt",
+                            VejetaryenSecenek = "Zeytinyağlı Taze Fasulye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AnaYemek = "Hasanpaşa Köfte",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1100,
+                            Tarih = new DateOnly(2026, 12, 17),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Patlıcan Musakka",
+                            YanYemek = "Şehriyeli Pilav"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AnaYemek = "Fırın Tavuk",
+                            Corba = "Tarhana Çorbası",
+                            Kalori = 1030,
+                            Tarih = new DateOnly(2026, 12, 18),
+                            Tatli = "Güllaç",
+                            VejetaryenSecenek = "Sebze Graten",
+                            YanYemek = "Mevsim Salata"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AnaYemek = "Orman Kebabı",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1050,
+                            Tarih = new DateOnly(2026, 12, 21),
+                            Tatli = "Sütlaç",
+                            VejetaryenSecenek = "Sebzeli Türlü",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AnaYemek = "Tavuk Sote",
+                            Corba = "Ezogelin Çorbası",
+                            Kalori = 980,
+                            Tarih = new DateOnly(2026, 12, 22),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Zeytinyağlı Taze Fasulye",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AnaYemek = "Etli Kuru Fasulye",
+                            Corba = "Domates Çorbası",
+                            Kalori = 1120,
+                            Tarih = new DateOnly(2026, 12, 23),
+                            Tatli = "Turşu",
+                            VejetaryenSecenek = "Zeytinyağlı Kuru Fasulye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AnaYemek = "Fırında Köfte",
+                            Corba = "Yayla Çorbası",
+                            Kalori = 1150,
+                            Tarih = new DateOnly(2026, 12, 24),
+                            Tatli = "Revani",
+                            VejetaryenSecenek = "Sebze Graten",
+                            YanYemek = "Patates Püresi"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            AnaYemek = "Fırın Tavuk",
+                            Corba = "Tarhana Çorbası",
+                            Kalori = 1010,
+                            Tarih = new DateOnly(2026, 12, 25),
+                            Tatli = "Ayran",
+                            VejetaryenSecenek = "Mantar Sote",
+                            YanYemek = "Şehriyeli Pilav"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            AnaYemek = "Etli Nohut",
+                            Corba = "Sebze Çorbası",
+                            Kalori = 1080,
+                            Tarih = new DateOnly(2026, 12, 28),
+                            Tatli = "Cacık",
+                            VejetaryenSecenek = "Zeytinyağlı Nohut",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            AnaYemek = "Tavuk Şiş",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1090,
+                            Tarih = new DateOnly(2026, 12, 29),
+                            Tatli = "Kemalpaşa Tatlısı",
+                            VejetaryenSecenek = "Sebzeli Bulgur",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            AnaYemek = "İzmir Köfte",
+                            Corba = "Şehriye Çorbası",
+                            Kalori = 1060,
+                            Tarih = new DateOnly(2026, 12, 30),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Zeytinyağlı Pırasa",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            AnaYemek = "Karnıyarık",
+                            Corba = "Ezogelin Çorbası",
+                            Kalori = 1000,
+                            Tarih = new DateOnly(2026, 12, 31),
+                            Tatli = "Yoğurt",
+                            VejetaryenSecenek = "İmam Bayıldı",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            AnaYemek = "Tavuk Döner",
+                            Corba = "Yayla Çorbası",
+                            Kalori = 1170,
+                            Tarih = new DateOnly(2027, 1, 4),
+                            Tatli = "Supangle",
+                            VejetaryenSecenek = "Sebzeli Makarna",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            AnaYemek = "Etli Bezelye",
+                            Corba = "Domates Çorbası",
+                            Kalori = 990,
+                            Tarih = new DateOnly(2027, 1, 5),
+                            Tatli = "Ayran",
+                            VejetaryenSecenek = "Zeytinyağlı Bezelye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            AnaYemek = "Fırında Makarna",
+                            Corba = "Tarhana Çorbası",
+                            Kalori = 1110,
+                            Tarih = new DateOnly(2027, 1, 6),
+                            Tatli = "Puding",
+                            VejetaryenSecenek = "Peynirli Makarna",
+                            YanYemek = "Mevsim Salata"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            AnaYemek = "Tas Kebabı",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1070,
+                            Tarih = new DateOnly(2027, 1, 7),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Ispanaklı Börek",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            AnaYemek = "Tavuk Haşlama",
+                            Corba = "Sebze Çorbası",
+                            Kalori = 980,
+                            Tarih = new DateOnly(2027, 1, 8),
+                            Tatli = "Kazandibi",
+                            VejetaryenSecenek = "Sebzeli Pilav",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            AnaYemek = "Kadınbudu Köfte",
+                            Corba = "Ezogelin Çorbası",
+                            Kalori = 1140,
+                            Tarih = new DateOnly(2027, 1, 11),
+                            Tatli = "Cacık",
+                            VejetaryenSecenek = "Mücver",
+                            YanYemek = "Patates Püresi"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            AnaYemek = "Etli Kuru Fasulye",
+                            Corba = "Yayla Çorbası",
+                            Kalori = 1120,
+                            Tarih = new DateOnly(2027, 1, 12),
+                            Tatli = "Turşu",
+                            VejetaryenSecenek = "Zeytinyağlı Kuru Fasulye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            AnaYemek = "Tavuk Pirzola",
+                            Corba = "Şehriye Çorbası",
+                            Kalori = 1160,
+                            Tarih = new DateOnly(2027, 1, 13),
+                            Tatli = "Şekerpare",
+                            VejetaryenSecenek = "Mantarlı Makarna",
+                            YanYemek = "Bulgur Pilavı"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            AnaYemek = "Etli Taze Fasulye",
+                            Corba = "Domates Çorbası",
+                            Kalori = 960,
+                            Tarih = new DateOnly(2027, 1, 14),
+                            Tatli = "Yoğurt",
+                            VejetaryenSecenek = "Zeytinyağlı Taze Fasulye",
+                            YanYemek = "Pirinç Pilavı"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            AnaYemek = "Hasanpaşa Köfte",
+                            Corba = "Mercimek Çorbası",
+                            Kalori = 1100,
+                            Tarih = new DateOnly(2027, 1, 15),
+                            Tatli = "Mevsim Meyvesi",
+                            VejetaryenSecenek = "Patlıcan Musakka",
+                            YanYemek = "Şehriyeli Pilav"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -2951,6 +3717,27 @@ namespace KampusPortali.Migrations
                     b.Navigation("Yazar");
                 });
 
+            modelBuilder.Entity("KampusPortali.Models.Etkinlik", b =>
+                {
+                    b.HasOne("KampusPortali.Models.Mekan", "Mekan")
+                        .WithMany()
+                        .HasForeignKey("MekanId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Mekan");
+                });
+
+            modelBuilder.Entity("KampusPortali.Models.KantinUrunu", b =>
+                {
+                    b.HasOne("KampusPortali.Models.Mekan", "Mekan")
+                        .WithMany("Urunler")
+                        .HasForeignKey("MekanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mekan");
+                });
+
             modelBuilder.Entity("KampusPortali.Models.KayipEsya", b =>
                 {
                     b.HasOne("KampusPortali.Models.Kullanici", "BildirenKullanici")
@@ -3082,6 +3869,8 @@ namespace KampusPortali.Migrations
             modelBuilder.Entity("KampusPortali.Models.Mekan", b =>
                 {
                     b.Navigation("Derslikler");
+
+                    b.Navigation("Urunler");
                 });
 #pragma warning restore 612, 618
         }
